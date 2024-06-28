@@ -79,7 +79,7 @@ const PersonalDetails = ({ setStep }: PersonalDetailsProps) => {
         {...{ register }}
         placeholder="Enter a secure password"
       />
-      <Button title="Next" className="w-full" onClick={() => setStep(2)} />
+      <Button title="Next" className="w-full" onClick={() => setStep(1)} />
     </form>
   );
 };

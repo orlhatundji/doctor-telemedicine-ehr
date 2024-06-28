@@ -7,12 +7,14 @@ import Multiselect from "../../components/MultiSelect";
 
 // Assets
 import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
+import { useNavigate } from "react-router-dom";
 
 type WorkDetailsProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const WorkDetails: React.FC<WorkDetailsProps> = () => {
+  const navigate = useNavigate();
   const { register } = useForm();
   return (
     <form className="flex flex-col gap-y-6 w-[474px]">
@@ -63,7 +65,9 @@ const WorkDetails: React.FC<WorkDetailsProps> = () => {
         type="number"
       />
 
-      <Button title="Next" className="w-full" />
+      <Button title="Next" className="w-full"
+        onClick={() => navigate("/doctor-telemedicine-ehr/overview")}
+      />
     </form>
   );
 };

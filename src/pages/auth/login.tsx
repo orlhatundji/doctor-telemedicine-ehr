@@ -30,7 +30,7 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
         {...{ register }}
         placeholder="Enter a secure password"
       />
-      <Button title="Login" className="w-full" onClick={() => setStep(1)} />
+      <Button title="Login" className="w-full" onClick={() => setStep(0)} />
     </form>
   );
 };
