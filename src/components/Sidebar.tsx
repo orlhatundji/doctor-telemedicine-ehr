@@ -7,11 +7,12 @@ import { ReactComponent as DashboardInActiveIcon } from "../assets/icons/dashboa
 import { ReactComponent as PatientsActiveIcon } from "../assets/icons/patients_active.svg";
 import { ReactComponent as PatientsInActiveIcon } from "../assets/icons/patients_inactive.svg";
 import { ReactComponent as SettingsActiveIcon } from "../assets/icons/settings_active.svg";
-import { ReactComponent as SettingsInActiveIcon } from "../assets/icons/settings_inactive.svg"; 
+import { ReactComponent as SettingsInActiveIcon } from "../assets/icons/settings_inactive.svg";
 import { ReactComponent as AppointmentsActiveIcon } from "../assets/icons/appointments_active.svg";
 import { ReactComponent as AppointmentsInActiveIcon } from "../assets/icons/appointments_inactive.svg";
 import { ReactComponent as ReviewsActiveIcon } from "../assets/icons/reviews_active.svg";
 import { ReactComponent as ReviewsInActiveIcon } from "../assets/icons/reviews_inactive.svg";
+import { ReactComponent as PlatformLogo } from "../assets/icons/platform_logo.svg";
 
 const routes = [
   {
@@ -70,7 +71,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-[320px] h-full">
+    <div className="w-[320px] h-full border-r shadow">
+      <div className="h-20 flex items-center pl-11">
+        <PlatformLogo className="ml-6" />
+      </div>
       <div className="relative flex flex-col gap-y-2 p-6 h-[385px]">
         <div
           className={twMerge(
@@ -98,7 +102,9 @@ const Sidebar = () => {
             <span
               className={twMerge(
                 "group-hover:font-bold font-medium text-lg",
-                activeRoute === route.name ? "text-white font-bold" : "text-tertiary-100",
+                activeRoute === route.name
+                  ? "text-white font-bold"
+                  : "text-tertiary-100"
               )}
             >
               {route.name}

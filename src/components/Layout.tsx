@@ -1,13 +1,17 @@
 import React from "react";
 import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
 
-const withFixedSidebar = (PageComponent: React.ComponentType) => {
+const withFixedSidebar = (PageComponent: React.ComponentType, title: string) => {
   const WithFixedSidebar: React.FC = () => {
     return (
-      <div className="flex gap-x-6 h-screen">
+      <div className="flex h-screen">
         <Sidebar />
 
+        <div className="flex-1 flex flex-col">
+          <Topbar title={title} />
         <PageComponent />
+        </div>
       </div>
     );
   };
