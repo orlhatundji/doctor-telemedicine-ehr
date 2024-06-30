@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/doctor-telemedicine-ehr/static/css/main.75967639.css",
-    "main.js": "/doctor-telemedicine-ehr/static/js/main.2b2780fa.js",
+    "main.css": "/doctor-telemedicine-ehr/static/css/main.cf7c4a16.css",
+    "main.js": "/doctor-telemedicine-ehr/static/js/main.43df4635.js",
     "static/js/453.e9fde638.chunk.js": "/doctor-telemedicine-ehr/static/js/453.e9fde638.chunk.js",
     "static/media/person.svg": "/doctor-telemedicine-ehr/static/media/person.b7b32ab8c956ebb978c13eeb761762e8.svg",
     "static/media/proximanova_regular.ttf": "/doctor-telemedicine-ehr/static/media/proximanova_regular.8181ca4b7c2d1189d78a.ttf",
@@ -18,6 +18,7 @@
     "static/media/patients_active.svg": "/doctor-telemedicine-ehr/static/media/patients_active.aea9603c319041fe133343d169793563.svg",
     "static/media/patients_outline.svg": "/doctor-telemedicine-ehr/static/media/patients_outline.c433c111c210beb916d5f571d1bfc2ee.svg",
     "static/media/reviews_active.svg": "/doctor-telemedicine-ehr/static/media/reviews_active.0d814527da51b98b474d437aeb487305.svg",
+    "static/media/note.svg": "/doctor-telemedicine-ehr/static/media/note.04d8d6775a73b79aa94db2b58a1abb50.svg",
     "static/media/cloud.svg": "/doctor-telemedicine-ehr/static/media/cloud.ef4030d93535aadc3b493b104bd55a06.svg",
     "static/media/reviews_inactive.svg": "/doctor-telemedicine-ehr/static/media/reviews_inactive.2736c8814e5537b805d6331c880b9432.svg",
     "static/media/notification.svg": "/doctor-telemedicine-ehr/static/media/notification.d0c360d3d0e042986d998c94855d253c.svg",
@@ -26,13 +27,15 @@
     "static/media/dashboard_inactive.svg": "/doctor-telemedicine-ehr/static/media/dashboard_inactive.9af5945c2e4cee08f5dd7483bb198a69.svg",
     "index.html": "/doctor-telemedicine-ehr/index.html",
     "static/media/search.svg": "/doctor-telemedicine-ehr/static/media/search.af3f81a707fd827982fb42e52fdc490d.svg",
+    "static/media/star_active.svg": "/doctor-telemedicine-ehr/static/media/star_active.312bf89abf6a9c0e75831c50e8f1f632.svg",
+    "static/media/star_inactive.svg": "/doctor-telemedicine-ehr/static/media/star_inactive.c29e5427f729f724cde74b1a90be5e85.svg",
     "static/media/mask.svg": "/doctor-telemedicine-ehr/static/media/mask.768f7568d1951d5abd311e09c348fb7a.svg",
-    "main.75967639.css.map": "/doctor-telemedicine-ehr/static/css/main.75967639.css.map",
-    "main.2b2780fa.js.map": "/doctor-telemedicine-ehr/static/js/main.2b2780fa.js.map",
+    "main.cf7c4a16.css.map": "/doctor-telemedicine-ehr/static/css/main.cf7c4a16.css.map",
+    "main.43df4635.js.map": "/doctor-telemedicine-ehr/static/js/main.43df4635.js.map",
     "453.e9fde638.chunk.js.map": "/doctor-telemedicine-ehr/static/js/453.e9fde638.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75967639.css",
-    "static/js/main.2b2780fa.js"
+    "static/css/main.cf7c4a16.css",
+    "static/js/main.43df4635.js"
   ]
 }
