@@ -20,7 +20,6 @@ const Ratings: React.FC<RatingsProps> = ({ rating }) => {
             </div>
           ))}
       </div>
-      <div className="text-sm text-tertiary-300 text-[.625rem] leading-[0] -mb-0.5">{rating}</div>
     </div>
   );
 };

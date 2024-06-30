@@ -2,7 +2,10 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
-const withFixedSidebar = (PageComponent: React.ComponentType, title: string) => {
+const withFixedSidebar = (
+  PageComponent: React.ComponentType,
+  title: string
+) => {
   const WithFixedSidebar: React.FC = () => {
     return (
       <div className="flex h-screen">
@@ -10,7 +13,9 @@ const withFixedSidebar = (PageComponent: React.ComponentType, title: string) => 
 
         <div className="flex-1 flex flex-col">
           <Topbar title={title} />
-        <PageComponent />
+          <div className="flex-1 px-6 py-8">
+            <PageComponent />
+          </div>
         </div>
       </div>
     );

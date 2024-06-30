@@ -7,10 +7,12 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#FA5805',
+
         'secondary': {
           100: '#E2E2D5',
           200: '#888883',
           300: "#FFE4D6",
+          400: "#FFF4EE",
         },
         "tertiary": {
           100: "#111111",
@@ -21,12 +23,14 @@ module.exports = {
           100: "#E0E0E0",
           200: "#A0A3BD",
           300: "#DDDDDD",
+          400: "#BBBBBB",
         },
         "placeholder": "#959595",
         "off-white": {
           100: "#F5F5F5",
           200: "#E8E8E8",
           300: "#FA5805",
+          400: "#DFE1E6",
         },
         "grey": {
           100: "#818181",
@@ -34,6 +38,7 @@ module.exports = {
           300: "#444444",
           400: "#8E8E8E",
           500: "#AAAAAA",
+          600: "#42526E",
         },
         "app-bg": "#F0F0F0"
       },
