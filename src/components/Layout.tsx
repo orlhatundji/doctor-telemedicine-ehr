@@ -1,27 +1,41 @@
-import React from "react";
+import { Suspense, useState } from "react";
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+
+// Components
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import Loader from "./Loader";
 
-const withFixedSidebar = (
-  PageComponent: React.ComponentType,
-  title: string
-) => {
-  const WithFixedSidebar: React.FC = () => {
-    return (
-      <div className="flex h-screen">
-        <Sidebar />
+// Pages
+import OverviewPage from "../pages/overview";
+import PatientsPage from "../pages/patients";
 
-        <div className="flex-1 flex flex-col">
-          <Topbar title={title} />
-          <div className="flex-1 px-6 py-8">
-            <PageComponent />
-          </div>
+const WithFixedSidebar = () => {
+  const [pageTitle, setPageTitle] = useState<string>("Overview");
+  return (
+    <div className="flex h-screen">
+      <Sidebar {...{ setPageTitle }} />
+
+      <div className="flex-1 flex flex-col">
+        <Topbar title={pageTitle} />
+        <div className="flex-1 px-6 py-8">
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<OverviewPage />} />
+              <Route path="/overview" element={<OverviewPage />} />
+              <Route
+                path="/patients"
+                element={<PatientsPage />}
+              />
+            </Routes>
+          </Suspense>
         </div>
       </div>
-    );
-  };
-
-  return WithFixedSidebar;
+    </div>
+  );
 };
 
-export default withFixedSidebar;
+export default WithFixedSidebar;

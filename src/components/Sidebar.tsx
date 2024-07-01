@@ -1,5 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+
+// Constants
+import { base_url } from "../utils/constants";
 
 // Assets
 import { ReactComponent as DashboardActiveIcon } from "../assets/icons/dashboard_active.svg";
@@ -14,7 +18,18 @@ import { ReactComponent as ReviewsActiveIcon } from "../assets/icons/reviews_act
 import { ReactComponent as ReviewsInActiveIcon } from "../assets/icons/reviews_inactive.svg";
 import { ReactComponent as PlatformLogo } from "../assets/icons/platform_logo.svg";
 
-const routes = [
+type Route = {
+  id: number;
+  name: string;
+  icon?: JSX.Element;
+  icons: {
+    active: JSX.Element;
+    inactive: JSX.Element;
+  };
+  to: string;
+};
+
+const routes: Route[] = [
   {
     id: 0,
     name: "Overview",
@@ -23,7 +38,7 @@ const routes = [
       active: <DashboardActiveIcon />,
       inactive: <DashboardInActiveIcon />,
     },
-    to: "/dashboard",
+    to: "/overview",
   },
   {
     id: 1,
@@ -62,16 +77,23 @@ const routes = [
     to: "/settings",
   },
 ];
-const Sidebar = () => {
+const Sidebar = ({
+  setPageTitle,
+}: {
+  setPageTitle: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const navigate = useNavigate();
   const [activeRoute, setActiveRoute] = React.useState(routes[0].name);
   const [activeRouteId, setActiveRouteId] = React.useState(routes[0].id);
-  const activeRouteHandler = (route: string, id: number) => {
-    setActiveRoute(route);
+  const activeRouteHandler = (route: Route, id: number) => {
+    setActiveRoute(route.name);
     setActiveRouteId(id);
+    setPageTitle(route.name);
+    navigate(`/${base_url}${route.to}`);
   };
 
   return (
-    <div className="w-[320px] h-full border-r shadow">
+    <div className="w-[320px] h-full border-r">
       <div className="h-20 flex items-center pl-11">
         <PlatformLogo className="ml-6" />
       </div>
@@ -94,7 +116,7 @@ const Sidebar = () => {
               "group flex items-center gap-x-4 py-6 pl-11  rounded-e-lg",
               "z-10 cursor-pointer"
             )}
-            onClick={() => activeRouteHandler(route.name, route.id)}
+            onClick={() => activeRouteHandler(route, route.id)}
           >
             {activeRoute === route.name
               ? route.icons.active

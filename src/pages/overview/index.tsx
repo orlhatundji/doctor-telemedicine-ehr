@@ -1,9 +1,10 @@
 import React from "react";
-import withFixedSidebar from "../../components/Layout";
-import MyPatients from "./components/MyPatients";
+
+// Components
 import Appointments from "./components/Appointments";
-import Reviews from "./components/Reviews";
 import CustomCalendar from "../../components/Calendar";
+import MyPatients from "./components/MyPatients";
+import Reviews from "./components/Reviews";
 
 const OverviewPage: React.FC = () => {
   return (
@@ -20,4 +21,4 @@ const OverviewPage: React.FC = () => {
   );
 };
 
-export default withFixedSidebar(OverviewPage, "Overview");
+export default OverviewPage
