@@ -2,6 +2,7 @@ import React from "react";
 
 // Components
 import Patient from "./components/Patient";
+import SearchInput from "../../components/SearchInput";
 
 const PatientsPage: React.FC = () => {
   const patients = [
@@ -13,7 +14,7 @@ const PatientsPage: React.FC = () => {
       phone: "1234567890",
       noOfVisits: 5,
       recentVisit: "1 July 2024",
-      upComingVisit: "1 July 2024"
+      upComingVisit: "1 July 2024",
     },
     {
       id: 2,
@@ -23,7 +24,7 @@ const PatientsPage: React.FC = () => {
       phone: "1234567890",
       noOfVisits: 5,
       recentVisit: "1 July 2024",
-      upComingVisit: "1 July 2024"
+      upComingVisit: "1 July 2024",
     },
     {
       id: 2,
@@ -33,7 +34,7 @@ const PatientsPage: React.FC = () => {
       phone: "1234567890",
       noOfVisits: 5,
       recentVisit: "1 July 2024",
-      upComingVisit: "1 July 2024"
+      upComingVisit: "1 July 2024",
     },
     {
       id: 2,
@@ -43,7 +44,7 @@ const PatientsPage: React.FC = () => {
       phone: "1234567890",
       noOfVisits: 5,
       recentVisit: "1 July 2024",
-      upComingVisit: "1 July 2024"
+      upComingVisit: "1 July 2024",
     },
     {
       id: 2,
@@ -53,17 +54,22 @@ const PatientsPage: React.FC = () => {
       phone: "1234567890",
       noOfVisits: 5,
       recentVisit: "1 July 2024",
-      upComingVisit: "1 July 2024"
+      upComingVisit: "1 July 2024",
     },
-
-  ]
+  ];
   return (
-    <div className="flex gap-6 flex-wrap">
-      {patients.map((patient) => (
-        <Patient key={patient.id} {...patient} />
-      ))}
-    </div>
+    <>
+      <div className="w-fit">
+        <SearchInput />
+      </div>
+
+      <div className="flex gap-6 flex-wrap mt-6">
+        {patients.map((patient) => (
+          <Patient key={patient.id} {...patient} />
+        ))}
+      </div>
+    </>
   );
 };
 
-export default PatientsPage
+export default PatientsPage;
