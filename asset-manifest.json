@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/doctor-telemedicine-ehr/static/css/main.4ee402d8.css",
-    "main.js": "/doctor-telemedicine-ehr/static/js/main.4e12299f.js",
-    "static/js/453.e9fde638.chunk.js": "/doctor-telemedicine-ehr/static/js/453.e9fde638.chunk.js",
+    "main.css": "/doctor-telemedicine-ehr/static/css/main.0c12d3ca.css",
+    "main.js": "/doctor-telemedicine-ehr/static/js/main.5ef62490.js",
+    "static/js/453.37ff8029.chunk.js": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js",
     "static/media/person.svg": "/doctor-telemedicine-ehr/static/media/person.b7b32ab8c956ebb978c13eeb761762e8.svg",
     "static/media/proximanova_regular.ttf": "/doctor-telemedicine-ehr/static/media/proximanova_regular.8181ca4b7c2d1189d78a.ttf",
     "static/media/proximanova_semibold.ttf": "/doctor-telemedicine-ehr/static/media/proximanova_semibold.3a75f030b0e71ecb8838.ttf",
@@ -31,12 +31,12 @@
     "static/media/star_active.svg": "/doctor-telemedicine-ehr/static/media/star_active.312bf89abf6a9c0e75831c50e8f1f632.svg",
     "static/media/star_inactive.svg": "/doctor-telemedicine-ehr/static/media/star_inactive.c29e5427f729f724cde74b1a90be5e85.svg",
     "static/media/mask.svg": "/doctor-telemedicine-ehr/static/media/mask.768f7568d1951d5abd311e09c348fb7a.svg",
-    "main.4ee402d8.css.map": "/doctor-telemedicine-ehr/static/css/main.4ee402d8.css.map",
-    "main.4e12299f.js.map": "/doctor-telemedicine-ehr/static/js/main.4e12299f.js.map",
-    "453.e9fde638.chunk.js.map": "/doctor-telemedicine-ehr/static/js/453.e9fde638.chunk.js.map"
+    "main.0c12d3ca.css.map": "/doctor-telemedicine-ehr/static/css/main.0c12d3ca.css.map",
+    "main.5ef62490.js.map": "/doctor-telemedicine-ehr/static/js/main.5ef62490.js.map",
+    "453.37ff8029.chunk.js.map": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ee402d8.css",
-    "static/js/main.4e12299f.js"
+    "static/css/main.0c12d3ca.css",
+    "static/js/main.5ef62490.js"
   ]
 }
