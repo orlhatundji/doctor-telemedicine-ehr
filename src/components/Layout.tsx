@@ -10,10 +10,11 @@ import Topbar from "./Topbar";
 import Loader from "./Loader";
 
 // Pages
+import AppointmentsPage from "../pages/appointments";
 import OverviewPage from "../pages/overview";
 import PatientsPage from "../pages/patients";
+import PatientDetailsPage from "../pages/patients/details";
 import ReviewsPage from "../pages/reviews";
-import AppointmentsPage from "../pages/appointments";
 
 const WithFixedSidebar = () => {
   const [pageTitle, setPageTitle] = useState<string>("Overview");
@@ -31,6 +32,10 @@ const WithFixedSidebar = () => {
               <Route
                 path="/patients"
                 element={<PatientsPage />}
+              />
+              <Route
+                path="/patients/:id"
+                element={<PatientDetailsPage />}
               />
               <Route
                 path="/reviews"

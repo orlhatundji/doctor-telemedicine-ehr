@@ -2,6 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 // Components
 import { Button } from "./Button";
+import useScreenSize from "../hooks/useScreenSize";
 
 const records = [
   {
@@ -14,49 +15,46 @@ const records = [
   },
   {
     title: "Gender",
-    response: "Male"
+    response: "Male",
   },
   {
     title: "Marital status",
-    response: "Single"
+    response: "Single",
   },
   {
     title: "Contact info",
-    response: "Male"
+    response: "Male",
   },
   {
     title: "Emergency contact info",
-    response: "Male"
+    response: "Male",
   },
   {
     title: "Occupation",
-    response: "Educator"
+    response: "Educator",
   },
   {
     title: "Next of kin",
-    response: "Miss Duro Akinsola"
+    response: "Miss Duro Akinsola",
   },
   {
     title: "Relationship with Next of Kin",
-    response: "Sister"
-  }
+    response: "Sister",
+  },
 ];
-const PersonalProfile = () => {
+
+const PatientDetails = () => {
+  const { height } = useScreenSize();
+  const cardHeight = `${height - 450}px`;
   return (
-    <div className="flex flex-col divide-y-2 divide-stroke-300/10 flex-1 overflow-auto h-full ">
+    <div
+      className="p-4 flex flex-col divide-y-2 divide-stroke-300/10 flex-1 overflow-auto h-full"
+      style={{ maxHeight: cardHeight }}
+    >
       {records.map((record, i) => (
-        <div key={i} className="flex flex-col py-4">
+        <div key={i} className="flex flex-col py-2">
           <div className="flex">
-            <h3 className="font-semibold leading-[0rem]">{record.title}</h3>
-            <Button
-              type="button"
-              className={twMerge(
-                "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
-                "p-0"
-              )}
-              onClick={() => {}}
-              title="Edit"
-            />
+            <h3 className="font-semibold">{record.title}</h3>
           </div>
           <span className="text-grey-100 text-sm">{record.response}</span>
         </div>
@@ -65,4 +63,4 @@ const PersonalProfile = () => {
   );
 };
 
-export default PersonalProfile;
+export default PatientDetails;

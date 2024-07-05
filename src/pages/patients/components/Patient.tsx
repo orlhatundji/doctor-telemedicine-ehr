@@ -3,6 +3,8 @@ import React from "react";
 // Assets
 import person from "../../../assets/images/person.svg";
 import { Button } from "../../../components/Button";
+import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 type PatientProps = {
   name: string;
@@ -12,6 +14,9 @@ type PatientProps = {
   email: string;
   phone: string;
   noOfVisits: number;
+  showViewMore?: boolean;
+  className?: string;
+  size?: "sm" | "md";
 };
 
 const Patient: React.FC<PatientProps> = ({
@@ -22,20 +27,46 @@ const Patient: React.FC<PatientProps> = ({
   email,
   phone,
   noOfVisits,
+  showViewMore,
+  className = "border rounded-lg",
+  size = "sm",
 }) => {
+  const navigate = useNavigate();
   return (
-    <div className="border rounded-lg py-6 px-4 min-w-[328px]">
+    <div className={twMerge("py-6 px-4", className)}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2">
-          <img src={person} alt="" className="w-8 h-8 rounded-full" />
+          <img
+            src={person}
+            alt=""
+            className={twMerge(
+              "rounded-full",
+              size === "sm" ? "w-8 h-8" : "w-10 h-10"
+            )}
+          />
           <div className="">
-            <h2 className="font-bold text-sm leading-[.8rem]">{name}</h2>
+            <h2
+              className={twMerge(
+                "font-bold",
+                size === "sm"
+                  ? "text-sm leading-[.8rem]"
+                  : "text-base leading-[.8rem]"
+              )}
+            >
+              {name}
+            </h2>
             <span className="text-xs text-grey-100">
-              30 years | {noOfVisits} visits
+              {age} years | {noOfVisits} visits
             </span>
           </div>
         </div>
-        <Button title="View More" className="w-fit py-2 px-3 text-[.625rem]" />
+        {showViewMore && (
+          <Button
+            title="View More"
+            className="w-fit py-2 px-3 text-[.625rem]"
+            onClick={() => navigate("1")}
+          />
+        )}
       </div>
       <div className="flex items-center gap-x-8 mt-8">
         <div className="flex flex-col gap-y-0">

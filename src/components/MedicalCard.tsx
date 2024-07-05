@@ -1,6 +1,8 @@
-import { Button } from "./Button";
 import { twMerge } from "tailwind-merge";
 import { useNavigate } from "react-router-dom";
+
+// Hooks
+import useScreenSize from "../hooks/useScreenSize";
 
 const records = [
   {
@@ -68,27 +70,28 @@ const records = [
 ];
 const MedicalCard = () => {
   const navigate = useNavigate();
+  const { height } = useScreenSize();
+  const cardHeight = `${height - 450}px`;
   return (
-    <div className="flex flex-col divide-y-2 divide-stroke-300/10 flex-1 overflow-auto h-full ">
+    <div
+      className="p-4 flex flex-col divide-y-2 divide-stroke-300/10 flex-1 overflow-auto h-full"
+      style={{ maxHeight: cardHeight }}
+    >
       {records.map((record, i) => (
         <div key={i} className="flex flex-col gap-y-2 py-4">
           <div className="flex">
             <h3 className="font-semibold">{record.title}</h3>
-            <Button
-              type="button"
-              className={twMerge(
-                "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
-                "p-0"
-              )}
-              onClick={() => navigate("/doctor-telemedicine-ehr/medical-history-form")}
-              title="Edit"
-            />
           </div>
-          <div className="flex flex-wrap gap-1  max-w-[90%] ">
+          <div
+            className={twMerge(
+              "flex flex-wrap gap-1  max-w-[90%] pb-4 border-b overflow-auto"
+            )}
+          >
             {record.response.map((response, i) => (
-              <div key={i} className="px-4 py-2 bg-primary/10 rounded-full">
-                <span className="text-primary text-sm">{response}</span>
-              </div>
+              <span className="text-sm">
+                {response}
+                {i < record.response.length - 1 && ","}
+              </span>
             ))}
           </div>
         </div>
