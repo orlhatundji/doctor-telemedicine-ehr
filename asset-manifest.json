@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/doctor-telemedicine-ehr/static/css/main.b16ed5c9.css",
-    "main.js": "/doctor-telemedicine-ehr/static/js/main.66c0e135.js",
+    "main.js": "/doctor-telemedicine-ehr/static/js/main.30d2ff19.js",
     "static/js/453.37ff8029.chunk.js": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js",
     "static/media/person.svg": "/doctor-telemedicine-ehr/static/media/person.b7b32ab8c956ebb978c13eeb761762e8.svg",
     "static/media/proximanova_regular.ttf": "/doctor-telemedicine-ehr/static/media/proximanova_regular.8181ca4b7c2d1189d78a.ttf",
@@ -38,11 +38,11 @@
     "static/media/cancel.svg": "/doctor-telemedicine-ehr/static/media/cancel.c02d2f3bcabdd6d8a072b2a8a2a3e52c.svg",
     "static/media/mask.svg": "/doctor-telemedicine-ehr/static/media/mask.768f7568d1951d5abd311e09c348fb7a.svg",
     "main.b16ed5c9.css.map": "/doctor-telemedicine-ehr/static/css/main.b16ed5c9.css.map",
-    "main.66c0e135.js.map": "/doctor-telemedicine-ehr/static/js/main.66c0e135.js.map",
+    "main.30d2ff19.js.map": "/doctor-telemedicine-ehr/static/js/main.30d2ff19.js.map",
     "453.37ff8029.chunk.js.map": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b16ed5c9.css",
-    "static/js/main.66c0e135.js"
+    "static/js/main.30d2ff19.js"
   ]
 }
