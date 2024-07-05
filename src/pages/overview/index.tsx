@@ -8,7 +8,7 @@ import Reviews from "./components/Reviews";
 
 const OverviewPage: React.FC = () => {
   return (
-    <div className=" max-w-[928px] ">
+    <div className="max-w-[928px] ">
       <div className="flex gap-x-4">
         <MyPatients />
         <Appointments />

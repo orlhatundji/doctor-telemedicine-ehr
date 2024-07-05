@@ -8,6 +8,7 @@ import {
 
 // Components
 import Loader from "./components/Loader";
+import InstallButton from "./components/InstallButton";
 
 // Pages
 import Auth from "./pages/auth";
@@ -16,6 +17,7 @@ import WithFixedSidebar from "./components/Layout";
 function App() {
   return (
     <Router>
+      <InstallButton />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/doctor-telemedicine-ehr/auth" element={<Auth />} />

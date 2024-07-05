@@ -44,6 +44,7 @@ const usePWARunningMode = (): PWARunningMode => {
     // Initial install status check
     const initialInstallCheck = matchMediaStandalone;
     setIsInstalled(initialInstallCheck);
+
   }, []);
 
   return { isStandalone, isInstalled, isAndroid, isIOS };
