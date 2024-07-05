@@ -15,14 +15,15 @@ import OverviewPage from "../pages/overview";
 import PatientsPage from "../pages/patients";
 import PatientDetailsPage from "../pages/patients/details";
 import ReviewsPage from "../pages/reviews";
+import SettingsPage from "../pages/settings";
 
 const WithFixedSidebar = () => {
   const [pageTitle, setPageTitle] = useState<string>("Overview");
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar {...{ setPageTitle }} />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <Topbar title={pageTitle} />
         <div className="flex-1 px-6 py-8">
           <Suspense fallback={<Loader />}>
@@ -40,6 +41,10 @@ const WithFixedSidebar = () => {
               <Route
                 path="/reviews"
                 element={<ReviewsPage />}
+              />
+              <Route
+                path="/settings"
+                element={<SettingsPage />}
               />
               <Route
                 path="/appointments"
