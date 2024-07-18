@@ -40,7 +40,7 @@ const records = [
 ];
 
 const PersonalProfile = () => {
-  const [show, setShow] = useState(false);
+  const [, setShow] = useState(false);
   return (
     <div className="overflow-auto max-h-[85%] scroll-m-32">
      <div className="max-w-[668px]">

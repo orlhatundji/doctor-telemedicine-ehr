@@ -85,6 +85,10 @@
     @apply pt-8;
   }
 
+  .icon-pointer {
+    @apply cursor-pointer hover:scale-110 transition-transform ease-in;
+  }
+
   .input {
     @apply ring-0 focus:ring-0 outline-none placeholder-gray-500;
   }

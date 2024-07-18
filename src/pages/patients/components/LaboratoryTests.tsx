@@ -6,8 +6,10 @@ import { Button } from "../../../components/Button";
 // Assets
 import { ReactComponent as AddIcon } from "../../../assets/icons/add.svg";
 import { ReactComponent as TabletIcon } from "../../../assets/icons/doc.svg";
+import AddLabTest from "../../../components/AddLabTest";
 
 const LaboratoryTests = () => {
+  const [showAddLabTest, setShowAddLabTest] = React.useState(false);
   const [tests, ] = React.useState([
     {
       name: "Blood Test",
@@ -27,7 +29,7 @@ const LaboratoryTests = () => {
     <div className="py-8 px-6 border rounded-lg">
       <div className="flex items-center justify-between">
         <h1 className="header1 text-xl">Laboratory Tests</h1>
-        <AddIcon />
+        <AddIcon onClick={() => setShowAddLabTest(true)} className="icon-pointer"/>
       </div>
       <div className="flex flex-col">
         {tests.map((test, i) => (
@@ -46,6 +48,10 @@ const LaboratoryTests = () => {
           </div>
         ))}
       </div>
+      <AddLabTest 
+        show={showAddLabTest} 
+        setShow={setShowAddLabTest}
+       />
     </div>
   );
 };

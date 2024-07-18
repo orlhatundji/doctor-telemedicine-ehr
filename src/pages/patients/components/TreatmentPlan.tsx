@@ -63,7 +63,7 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
           <h1 className="header1 text-xl">Treatment Plan</h1>
           <AddIcon
             onClick={() => setShowAddTreatment(true)}
-            className="cursor-pointer"
+            className="icon-pointer"
           />
         </div>
         <span className="text-primary mt-4 mb-3 text-sm font-semibold">
@@ -89,7 +89,7 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
               <hr className="flex-1" />
               <RemoveIcon
                 onClick={() => setShowDeletePopover(true)}
-                className="cursor-pointer"
+                className="icon-pointer"
               />
               <DeleteConfirmPopover
                 show={showDeletePopover}
