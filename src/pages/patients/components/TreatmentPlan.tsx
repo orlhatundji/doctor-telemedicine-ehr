@@ -1,14 +1,14 @@
 import React from "react";
 
 // Components
+import AddTreatmentPlan from "../../../components/AddTreatmentPlan";
+import DeleteConfirmPopover from "../../../components/DeleteConfirm";
 import EmptyState from "../../../components/EmptyState";
-import Modal from "../../../components/Modal";
 
 // Assets
 import { ReactComponent as AddIcon } from "../../../assets/icons/add.svg";
 import { ReactComponent as RemoveIcon } from "../../../assets/icons/remove.svg";
 import { ReactComponent as TabletIcon } from "../../../assets/icons/tablet.svg";
-import AddTreatmentPlan from "../../../components/AddTreatmentPlan";
 
 type TreatmentPlanProps = {
   showAddTreatment: boolean;
@@ -19,6 +19,7 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
   showAddTreatment,
   setShowAddTreatment,
 }) => {
+  const [showDeletePopover, setShowDeletePopover] = React.useState(false);
   const [medications, setMedications] = React.useState([
     {
       name: "Paracetamol Acetine 500g",
@@ -53,6 +54,7 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
   const handleRemoveMedication = (index: number) => {
     const newMedications = medications.filter((_, i) => i !== index);
     setMedications(newMedications);
+    setShowDeletePopover(false);
   };
   return (
     <>
@@ -65,7 +67,8 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
           />
         </div>
         <span className="text-primary mt-4 mb-3 text-sm font-semibold">
-          Current medication {(medications.length) ? `(${medications.length})` : ""}
+          Current medication{" "}
+          {medications.length ? `(${medications.length})` : ""}
         </span>
         <div className="flex flex-col">
           {medications.length === 0 && (
@@ -85,15 +88,24 @@ const TreatmentPlan: React.FC<TreatmentPlanProps> = ({
               </div>
               <hr className="flex-1" />
               <RemoveIcon
-                onClick={() => handleRemoveMedication(i)}
+                onClick={() => setShowDeletePopover(true)}
                 className="cursor-pointer"
+              />
+              <DeleteConfirmPopover
+                show={showDeletePopover}
+                setShow={setShowDeletePopover}
+                handleDelete={() => handleRemoveMedication(i)}
               />
             </div>
           ))}
         </div>
       </div>
       <AddTreatmentPlan
-        {...{ show: showAddTreatment, setShow: setShowAddTreatment, handleAddMedication }}
+        {...{
+          show: showAddTreatment,
+          setShow: setShowAddTreatment,
+          handleAddMedication,
+        }}
       />
     </>
   );
