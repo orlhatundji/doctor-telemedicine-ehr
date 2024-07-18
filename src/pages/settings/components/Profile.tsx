@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 // Components
@@ -39,6 +40,7 @@ const records = [
 ];
 
 const PersonalProfile = () => {
+  const [show, setShow] = useState(false);
   return (
     <div className="overflow-auto max-h-[85%] scroll-m-32">
      <div className="max-w-[668px]">
@@ -57,7 +59,7 @@ const PersonalProfile = () => {
                   "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
                   "p-0"
                 )}
-                onClick={() => {}}
+                onClick={() => setShow(true)}
                 title="Edit"
               />
             </div>

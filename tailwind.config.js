@@ -42,7 +42,8 @@ module.exports = {
           600: "#42526E",
           700: "#8C8C8C"
         },
-        "app-bg": "#F0F0F0"
+        "app-bg": "#F0F0F0",
+        "red-alert": "#ff0000",
       },
       fontFamily: {
         'sans': ['Helveticaneue', 'Arial', 'sans-serif'],

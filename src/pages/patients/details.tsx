@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Patient from "./components/Patient";
 import { ProgressB } from "../../components/Progress";
@@ -19,7 +19,8 @@ const PatientDetails = () => {
     recentVisit: "1 July 2024",
     upComingVisit: "1 July 2024",
   };
-  const [step, setStep] = React.useState(0);
+  const [step, setStep] = useState(0);
+  const [showAddTreatment, setShowAddTreatment] = useState(false);
 
   return (
     <div>
@@ -46,7 +47,10 @@ const PatientDetails = () => {
           {step === 1 && <PersonalProfile />}
         </div>
         <div className="flex flex-col gap-y-6">
-          <TreatmentPlan />  
+          <TreatmentPlan 
+            showAddTreatment={showAddTreatment}
+            setShowAddTreatment={setShowAddTreatment}
+           />  
           <LaboratoryTests />
         </div>
       </div>
