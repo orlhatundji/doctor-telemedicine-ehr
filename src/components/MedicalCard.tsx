@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import { useNavigate } from "react-router-dom";
 
 // Hooks
 import useScreenSize from "../hooks/useScreenSize";
@@ -69,7 +68,6 @@ const records = [
   },
 ];
 const MedicalCard = () => {
-  const navigate = useNavigate();
   const { height } = useScreenSize();
   const cardHeight = `${height - 450}px`;
   return (

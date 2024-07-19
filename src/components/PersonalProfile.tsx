@@ -1,7 +1,4 @@
-import { twMerge } from "tailwind-merge";
-
 // Components
-import { Button } from "./Button";
 import useScreenSize from "../hooks/useScreenSize";
 
 const records = [

@@ -4,8 +4,8 @@ import React from "react";
 import SearchInput from "./SearchInput";
 
 // Assets
-import { ReactComponent as NotificationIcon } from "../assets/icons/notification.svg";
 import { ReactComponent as PersonIcon } from "../assets/images/person.svg";
+import NotificationsPanel from "./NotificationsPanel";
 
 const Topbar = ({ title }: { title: string }) => {
   return (
@@ -13,7 +13,7 @@ const Topbar = ({ title }: { title: string }) => {
       <h1 className="header1">{title}</h1>
       <div className="flex items-center gap-x-4">
         <SearchInput />
-        <NotificationIcon className="" />
+        <NotificationsPanel />
         <PersonIcon />
       </div>
     </div>
