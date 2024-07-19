@@ -7,6 +7,7 @@ import { Button } from "../../../components/Button";
 // Assets
 import { ReactComponent as DoctorImage } from "../../../assets/images/doctor.svg";
 import license from "../../../assets/images/license.png";
+import useScreenSize from "../../../hooks/useScreenSize";
 
 const records = [
   {
@@ -41,17 +42,42 @@ const records = [
 
 const PersonalProfile = () => {
   const [, setShow] = useState(false);
+  const { height } = useScreenSize();
   return (
-    <div className="overflow-auto max-h-[85%] scroll-m-32">
-     <div className="max-w-[668px]">
-     <DoctorImage className="mt-8" />
-      <h3 className="header3 text-base mt-7 text-primary">Personal Info</h3>
-      <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5">
-        {records.map((record, i) => (
-          <div key={i} className="flex flex-col py-4">
+    <div
+      className={twMerge("overflow-auto scroll-m-32")}
+      style={{ maxHeight: `${height - 200}px` }}
+    >
+      <div className="max-w-[668px]">
+        <DoctorImage className="mt-8" />
+        <h3 className="header3 text-base mt-7 text-primary">Personal Info</h3>
+        <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5">
+          {records.map((record, i) => (
+            <div key={i} className="flex flex-col py-4">
+              <div className="flex">
+                <h3 className="text-sm font-semibold leading-[0rem]">
+                  {record.title}
+                </h3>
+                <Button
+                  type="button"
+                  className={twMerge(
+                    "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
+                    "p-0"
+                  )}
+                  onClick={() => setShow(true)}
+                  title="Edit"
+                />
+              </div>
+              <span className="text-grey-100">{record.response}</span>
+            </div>
+          ))}
+        </div>
+        <h3 className="header3 text-base mt-7 text-primary">Work Experience</h3>
+        <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-2">
+          <div className="flex flex-col py-4">
             <div className="flex">
               <h3 className="text-sm font-semibold leading-[0rem]">
-                {record.title}
+                Field of Specialization
               </h3>
               <Button
                 type="button"
@@ -59,56 +85,35 @@ const PersonalProfile = () => {
                   "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
                   "p-0"
                 )}
-                onClick={() => setShow(true)}
+                onClick={() => {}}
                 title="Edit"
               />
             </div>
-            <span className="text-grey-100">{record.response}</span>
+            <span className="text-grey-100">Cardiologist</span>
           </div>
-        ))}
-      </div>
-      <h3 className="header3 text-base mt-7 text-primary">Work Experience</h3>
-      <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-2">
-        <div className="flex flex-col py-4">
-          <div className="flex">
-            <h3 className="text-sm font-semibold leading-[0rem]">
-              Field of Specialization
-            </h3>
-            <Button
-              type="button"
-              className={twMerge(
-                "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
-                "p-0"
-              )}
-              onClick={() => {}}
-              title="Edit"
-            />
+          <div className="flex flex-col py-4">
+            <div className="flex">
+              <h3 className="text-sm font-semibold leading-[0rem]">
+                Years of practice
+              </h3>
+              <Button
+                type="button"
+                className={twMerge(
+                  "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
+                  "p-0"
+                )}
+                onClick={() => {}}
+                title="Edit"
+              />
+            </div>
+            <span className="text-grey-100">5 years</span>
           </div>
-          <span className="text-grey-100">Cardiologist</span>
-        </div>
-        <div className="flex flex-col py-4">
-          <div className="flex">
-            <h3 className="text-sm font-semibold leading-[0rem]">
-              Years of practice
-            </h3>
-            <Button
-              type="button"
-              className={twMerge(
-                "ml-auto text-primary text-xs font-semibold w-fit bg-transparent",
-                "p-0"
-              )}
-              onClick={() => {}}
-              title="Edit"
-            />
+          <div>
+            <h3 className="text-sm font-semibold mb-2">License No</h3>
+            <img src={license} alt="doctor's license" />
           </div>
-          <span className="text-grey-100">5 years</span>
-        </div>
-        <div>
-          <h3 className="text-sm font-semibold mb-2">License No</h3>
-          <img src={license} alt="doctor's license" />
         </div>
       </div>
-     </div>
     </div>
   );
 };

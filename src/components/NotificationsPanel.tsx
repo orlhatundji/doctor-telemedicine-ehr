@@ -11,7 +11,7 @@ import { ReactComponent as ChatIcon } from "../assets/icons/chat.svg";
 import { ReactComponent as NotificationIcon } from "../assets/icons/notification.svg";
 
 const NotificationsPanel = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
   
   const [showAppointmentDetails, setShowAppointmentDetails] =
   React.useState(false);

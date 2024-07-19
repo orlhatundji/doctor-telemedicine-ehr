@@ -13,11 +13,15 @@ import InstallButton from "./components/InstallButton";
 // Pages
 import Auth from "./pages/auth";
 import WithFixedSidebar from "./components/Layout";
+import VideoCall from "./components/VideoCall";
+import { CallContextProvider } from "./contexts/callContext";
 
 function App() {
   return (
+    <CallContextProvider isCallActive startCall={() => {}} endCall={() => {}}>
     <Router>
       <InstallButton />
+      <VideoCall  />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/doctor-telemedicine-ehr/auth" element={<Auth />} />
@@ -31,6 +35,7 @@ function App() {
         </Routes>
       </Suspense>
     </Router>
+    </CallContextProvider>
   );
 }
 

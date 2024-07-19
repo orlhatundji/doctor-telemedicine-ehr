@@ -6,6 +6,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 // Custom Hooks
 import useScreenSize from "../../hooks/useScreenSize";
+import { CallContext } from "../../contexts/callContext";
 
 // Assets
 import person from "../../assets/images/person.svg";
@@ -64,8 +65,10 @@ const AppointmentsPage: React.FC = () => {
   ];
 
   const { height } = useScreenSize();
+  const { startCall } = React.useContext(CallContext);
   const handleCalendarClick = (event: any) => {
-    alert(`You clicked on ${event.title} scheduled for ${event.start}`);
+    // alert(`You clicked on ${event.title} scheduled for ${event.start}`);
+    startCall();
   };
   const [currentView, setCurrentView] = React.useState("agenda");
   return (
@@ -80,7 +83,7 @@ const AppointmentsPage: React.FC = () => {
       
         onSelectEvent={handleCalendarClick}
         onSelectSlot={() => {}}
-        className="bg-[#FAFAFA]"
+        className="bg-[#FAFAFA] cursor-pointer"
         onView={(e) => setCurrentView(e)}
         eventPropGetter={(event) => {
           return {
