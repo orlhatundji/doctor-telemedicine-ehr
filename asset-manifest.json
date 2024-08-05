@@ -1,11 +1,9 @@
 {
   "files": {
-    "main.css": "/doctor-telemedicine-ehr/static/css/main.aef733d0.css",
-    "main.js": "/doctor-telemedicine-ehr/static/js/main.cdd19c6e.js",
+    "main.css": "/doctor-telemedicine-ehr/static/css/main.9b885e65.css",
+    "main.js": "/doctor-telemedicine-ehr/static/js/main.9cbd33c6.js",
     "static/js/453.37ff8029.chunk.js": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js",
     "static/media/doctor.svg": "/doctor-telemedicine-ehr/static/media/doctor.089847f836ed772de5f278033800a951.svg",
-    "static/media/callbg.png": "/doctor-telemedicine-ehr/static/media/callbg.4a071ac45df2a6dfef05.png",
-    "static/media/doctor.png": "/doctor-telemedicine-ehr/static/media/doctor.07dc27d58e24df0fc34e.png",
     "static/media/person.svg": "/doctor-telemedicine-ehr/static/media/person.b7b32ab8c956ebb978c13eeb761762e8.svg",
     "static/media/proximanova_regular.ttf": "/doctor-telemedicine-ehr/static/media/proximanova_regular.8181ca4b7c2d1189d78a.ttf",
     "static/media/license.png": "/doctor-telemedicine-ehr/static/media/license.a316018e6d2242bd524d.png",
@@ -49,12 +47,12 @@
     "static/media/cancel.svg": "/doctor-telemedicine-ehr/static/media/cancel.c02d2f3bcabdd6d8a072b2a8a2a3e52c.svg",
     "static/media/close.svg": "/doctor-telemedicine-ehr/static/media/close.291a55e88e7bf682380757963fa83a2d.svg",
     "static/media/mask.svg": "/doctor-telemedicine-ehr/static/media/mask.768f7568d1951d5abd311e09c348fb7a.svg",
-    "main.aef733d0.css.map": "/doctor-telemedicine-ehr/static/css/main.aef733d0.css.map",
-    "main.cdd19c6e.js.map": "/doctor-telemedicine-ehr/static/js/main.cdd19c6e.js.map",
+    "main.9b885e65.css.map": "/doctor-telemedicine-ehr/static/css/main.9b885e65.css.map",
+    "main.9cbd33c6.js.map": "/doctor-telemedicine-ehr/static/js/main.9cbd33c6.js.map",
     "453.37ff8029.chunk.js.map": "/doctor-telemedicine-ehr/static/js/453.37ff8029.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aef733d0.css",
-    "static/js/main.cdd19c6e.js"
+    "static/css/main.9b885e65.css",
+    "static/js/main.9cbd33c6.js"
   ]
 }
