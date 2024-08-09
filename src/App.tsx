@@ -9,17 +9,15 @@ import {
 import { CallContext } from "./contexts/callContext";
 
 // Components
-import Loader from "./components/Loader";
 import InstallButton from "./components/InstallButton";
+import Loader from "./components/Loader";
+import WithFixedSidebar from "./components/Layout";
+import VideoCall from "./components/VideoFeed";
 
 // Pages
 import Auth from "./pages/auth";
-import WithFixedSidebar from "./components/Layout";
-import VideoCall from "./components/VideoFeed";
-// import { useLocalCameraStream } from "./hooks/useLocalCameraStream";
 
 function App() {
-  // const { localStream } = useLocalCameraStream();
   const { isCallActive } = useContext(CallContext);
   return (
     <Router>

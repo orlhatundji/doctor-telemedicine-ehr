@@ -65,10 +65,10 @@ const AppointmentsPage: React.FC = () => {
   ];
 
   const { height } = useScreenSize();
-  const { startCall, isCallActive } = React.useContext(CallContext);
+  const { startCall } = React.useContext(CallContext);
   const handleCalendarClick = (event: any) => {
     startCall();
-    alert(`You clicked on ${event.title} scheduled for ${event.start}`);
+    // alert(`You clicked on ${event.title} scheduled for ${event.start}`);
   };
   const [currentView, setCurrentView] = React.useState("agenda");
   return (

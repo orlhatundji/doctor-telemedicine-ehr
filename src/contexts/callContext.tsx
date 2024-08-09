@@ -20,7 +20,6 @@ export const CallContextProvider: React.FC<CallContextType> = ({ children }) => 
 
   // Function to start the call
   const startCall = () => {
-    // console.log("call started")
     setIsCallActive(true);
   };
 

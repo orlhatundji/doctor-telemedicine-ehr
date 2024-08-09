@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <CallContextProvider isCallActive startCall={() => {}} endCall={() => {}}>
+    <CallContextProvider isCallActive={false} startCall={() => {}} endCall={() => {}}>
       <App />
     </CallContextProvider>
   </React.StrictMode>
