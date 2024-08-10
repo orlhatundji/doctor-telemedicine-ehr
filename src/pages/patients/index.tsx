@@ -27,8 +27,8 @@ const patients = [
   },
   {
     id: 7,
-    name: "Akpan Udo",
-    age: 27,
+    name: "Onibon Yetunde",
+    age: 21,
     email: "jandoe1999@gmail.com",
     phone: "1234567890",
     noOfVisits: 5,

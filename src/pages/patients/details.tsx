@@ -11,9 +11,9 @@ const PatientDetails = () => {
   const navigate = useNavigate();
   const patient = {
     id: 2,
-    name: "Akpan Udo",
-    age: 27,
-    email: "jandoe1999@gmail.com",
+    name: "Onibon Yetunde",
+    age: 21,
+    email: "onibon2003@gmail.com",
     phone: "1234567890",
     noOfVisits: 5,
     recentVisit: "1 July 2024",
