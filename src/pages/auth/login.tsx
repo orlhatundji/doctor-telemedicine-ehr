@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import Input from "../../components/Input";
 import { Button } from "../../components/Button";
+import { axiosInstance } from "../../utils/baseAxios";
+import { useAuth } from "../../contexts/authContext";
 
 type LoginProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Login: React.FC<LoginProps> = ({ setStep }) => {
-  const { register } = useForm();
+  const { login } = useAuth();
+  const { register, handleSubmit } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      login(accessToken);
+    } }, [login]);
+    
+  const onSubmit = async (data: { email: string; password: string; }) => {
+    await axiosInstance.post("/auth/login", {
+      email: data.email,
+      password: data.password,
+    }).then((res) => {
+      console.log(res.data);
+      login(res.data.access_token);
+      localStorage.setItem("email", data.email);
+      setStep(0);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
   return (
-    <form className="flex flex-col gap-y-6 w-[474px]">
+    <form className="flex flex-col gap-y-6 w-[474px]" onSubmit={handleSubmit(onSubmit)}>
       <h1 className="header1 leading-[0]">Welcome</h1>
       <p className="mt-1 mb-10">
         Kindly fill in your details given from the hospital
@@ -30,7 +59,7 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
         {...{ register }}
         placeholder="Enter a secure password"
       />
-      <Button title="Login" className="w-full" onClick={() => setStep(0)} />
+      <Button title="Login" className="w-full" type="submit" />
     </form>
   );
 };

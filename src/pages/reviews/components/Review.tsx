@@ -7,10 +7,10 @@ import person from "../../../assets/images/person.svg";
 type ReviewProps = {
   name: string;
   rating: number;
-  review: string;
+  content: string;
 };
 
-const Review: React.FC<ReviewProps> = ({ name, rating, review }) => {
+const Review: React.FC<ReviewProps> = ({ name, rating, content }) => {
   return (
     <div className="border rounded-lg py-6 px-4 flex flex-col items-center max-w-[215px]">
       <img src={person} alt="" className="w-20 h-20 rounded-full" />
@@ -21,7 +21,7 @@ const Review: React.FC<ReviewProps> = ({ name, rating, review }) => {
         </span>
       </div>
       <h2 className="font-bold text-lg mt-1 text-tertiary-400">{name}</h2>
-      <p className="text-grey-700 leading-[1.5rem] text-center">{review.substring(0,50)}</p>
+      <p className="text-grey-700 leading-[1.5rem] text-center">{content?.substring(0,50)}</p>
     </div>
   );
 };

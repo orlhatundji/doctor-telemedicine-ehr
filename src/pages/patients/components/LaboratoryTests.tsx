@@ -1,14 +1,14 @@
 import React from "react";
 
 // Components
-import AddLabTest from "../../../components/AddLabTest";
 import { Button } from "../../../components/Button";
+import AddLabTest from "../../../components/AddLabTest";
+import MyPdfViewer from "../../../components/PDFViewer";
 
 // Assets
 import { ReactComponent as AddIcon } from "../../../assets/icons/add.svg";
 import { ReactComponent as TabletIcon } from "../../../assets/icons/doc.svg";
-import MyPdfViewer from "../../../components/PDFViewer";
-// import StoolTest from "../../../assets/lab_tests_patient/lab_test_stool_test.pdf"
+
 type Test = {
   name: string;
   date: string;

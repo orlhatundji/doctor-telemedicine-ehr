@@ -1,42 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Components
 import Review from "./components/Review";
+import { axiosInstance } from "../../utils/baseAxios";
 
 const ReviewsPage: React.FC = () => {
 
-  const reviews = [
-    {
-      id: 1,
-      name: "John Ndukka",
-      rating: 4,
-      review: "Great doctor, very friendly and professional",
-    },
-    {
-      id: 2,
-      name: "Bakare Stephen",
-      rating: 2,
-      review: "Lousy doctor, very unfriendly and unprofessional. I would not recommend him to anyone",
-    },
-    {
-      id: 3,
-      name: "Babawale Blessing",
-      rating: 3.5,
-      review: "Great doctor, very friendly and professional",
-    },
-    {
-      id: 4,
-      name: "Etuk Christiana",
-      rating: 4.75,
-      review: "Great doctor, very friendly and professional",
-    },
-    {
-      id: 3,
-      name: "Iyede Oghenekaro",
-      rating: 5,
-      review: "Great doctor, very friendly and professional",
-    },
-  ];
+  const [reviews, setReviews] = useState([])
+  useEffect(() => {
+    axiosInstance.get('/review').then((res) => {
+      console.log("review", res)
+      setReviews(res.data)
+    })
+
+  }, [])
 
   return (
     <>
@@ -45,7 +22,7 @@ const ReviewsPage: React.FC = () => {
       </h3>
 
       <div className="flex gap-6 flex-wrap mt-4">
-        {reviews.map((review) => (
+        {reviews.map((review: any) => (
           <Review key={review.id} {...review} />
         ))}
       </div>

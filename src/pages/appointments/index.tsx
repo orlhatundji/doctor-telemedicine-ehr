@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import dayjs from "dayjs";
@@ -11,6 +11,8 @@ import { CallContext } from "../../contexts/callContext";
 // Assets
 import person from "../../assets/images/person.svg";
 import video_icon from "../../assets/images/video_icon.png";
+import { axiosInstance } from "../../utils/baseAxios";
+import { add30Minutes } from "../../utils/helpers";
 
 const localizer = dayjsLocalizer(dayjs);
 
@@ -47,7 +49,7 @@ const AppointmentsPage: React.FC = () => {
     {
       id: 14,
       title: "Today's Consultation",
-      person: { name: "Ezeani Chiamaka" },
+      person: { name: "Onibon Yetunde" },
       agenda:
         "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
       start: new Date(new Date().setHours(new Date().getHours() - 3)),
@@ -56,7 +58,7 @@ const AppointmentsPage: React.FC = () => {
     {
       id: 14,
       title: "Consultation with Kunle",
-      person: { name: "Akinode Memunat" },
+      person: { name: "Fagbenro Memunat" },
       agenda:
         "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
       start: new Date(new Date().setHours(new Date().getHours() + 3)),
@@ -68,14 +70,35 @@ const AppointmentsPage: React.FC = () => {
   const { startCall } = React.useContext(CallContext);
   const handleCalendarClick = (event: any) => {
     startCall();
-    // alert(`You clicked on ${event.title} scheduled for ${event.start}`);
+    // alert(`Event scheduled for ${event.start} to ${event.end}`);
   };
+  const [appointments, setAppointments] = React.useState([]);
+
+  useEffect(() => {
+    axiosInstance.get("/appointment").then((res) => {
+      let apptms = res.data.map((appointment: any) => {
+        const date = new Date(appointment.date);
+        return {
+          id: appointment.id,
+          title: appointment.title,
+          person: appointment.patient,
+          agenda: appointment.description,
+          start: date,
+          end: add30Minutes(date),
+        };
+      });
+      setAppointments(apptms);
+    }).catch((error) => {
+      console.error(error);
+    });
+  } , []);
+
   const [currentView, setCurrentView] = React.useState("agenda");
   return (
     <div>
       <Calendar
         localizer={localizer}
-        events={myEventsList}
+        events={appointments}
         startAccessor="start"
         endAccessor="end"
         defaultView="agenda"

@@ -1,4 +1,13 @@
-
+export const add30Minutes = (date: Date) => {
+  const d = new Date(date);
+  if (d.getMinutes() < 30) {
+    d.setMinutes(30);
+  } else {
+    d.setHours(d.getHours() + 1);
+    d.setMinutes(0);
+  }
+  return d;
+}
 
 export const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);

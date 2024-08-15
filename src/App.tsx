@@ -17,26 +17,42 @@ import VideoCall from "./components/VideoFeed";
 // Pages
 import Auth from "./pages/auth";
 
+// Contexts
+import { useAuth } from "./contexts/authContext";
+
 function App() {
   const { isCallActive } = useContext(CallContext);
+  const { isAuthenticated } = useAuth();
+  console.log(isAuthenticated);
   return (
     <Router>
       <InstallButton />
       {isCallActive && <VideoCall />}
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/doctor-telemedicine-ehr/auth" element={<Auth />} />
-          <Route path="/doctor-telemedicine-ehr">
+          {!isAuthenticated ? (
+            <>
+            <Route path="/doctor-telemedicine-ehr/auth" element={<Auth />} />
             <Route
-              path="/doctor-telemedicine-ehr/*"
-              index
-              element={<WithFixedSidebar />}
-            />
-          </Route>
-          <Route
-            path="*"
-            element={<Navigate to="/doctor-telemedicine-ehr/" replace />}
-          />
+                path="*"
+                element={<Navigate to={"/doctor-telemedicine-ehr/auth"} replace />}
+              />
+              </> 
+          ) : (
+            <>
+              <Route path="/doctor-telemedicine-ehr">
+                <Route
+                  path="/doctor-telemedicine-ehr/*"
+                  index
+                  element={<WithFixedSidebar />}
+                />
+              </Route>
+              <Route
+                path="*"
+                element={<Navigate to={"/doctor-telemedicine-ehr/"} replace />}
+              />
+            </>
+          )}
         </Routes>
       </Suspense>
     </Router>

@@ -6,15 +6,18 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
 import { CallContextProvider } from "./contexts/callContext";
+import { AuthProvider } from "./contexts/authContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CallContextProvider isCallActive={false} startCall={() => {}} endCall={() => {}}>
-      <App />
-    </CallContextProvider>
+    <AuthProvider>
+      <CallContextProvider isCallActive={false} startCall={() => {}} endCall={() => {}}>
+        <App />
+      </CallContextProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
 
