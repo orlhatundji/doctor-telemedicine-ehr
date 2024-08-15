@@ -9,7 +9,6 @@ const ReviewsPage: React.FC = () => {
   const [reviews, setReviews] = useState([])
   useEffect(() => {
     axiosInstance.get('/review').then((res) => {
-      console.log("review", res)
       setReviews(res.data)
     })
 

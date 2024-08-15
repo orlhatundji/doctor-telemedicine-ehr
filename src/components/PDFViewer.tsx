@@ -2,6 +2,7 @@ import React  from "react";
 
 // Components
 import Modal from "./Modal";
+import { baseFEUrl } from "../utils/baseAxios";
 
 type MyPdfViewerProps = {
   title: string;
@@ -20,7 +21,7 @@ const MyPdfViewer = ({ title, path, show, setShow }: MyPdfViewerProps) => {
          
         >
           <object
-            data={`http://localhost:3000/doctor-telemedicine-ehr/lab_tests_patient/${path}`}
+            data={`${baseFEUrl}/lab_tests_patient/${path}`}
             type="application/pdf"
             className="h-[65vh] w-full"
         

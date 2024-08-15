@@ -4,7 +4,7 @@ import useScreenSize from "../hooks/useScreenSize";
 const records = [
   {
     title: "Name",
-    response: "Michael Akinsola",
+    response: "Onibon Yetunde",
   },
   {
     title: "Age",

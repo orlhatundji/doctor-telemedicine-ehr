@@ -81,7 +81,6 @@ const PatientsPage: React.FC = () => {
           upComingVisit: patient.upComingVisit,
         };
       });
-      console.log(patients);
       setPatients(patients);
       setQueryPatients(patients);
     }).catch((error) => {

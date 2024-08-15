@@ -50,6 +50,7 @@ const WithFixedSidebar = () => {
                 path="/appointments"
                 element={<AppointmentsPage />}
               />
+              <Route path="*" element={<OverviewPage />} />
             </Routes>
           </Suspense>
         </div>

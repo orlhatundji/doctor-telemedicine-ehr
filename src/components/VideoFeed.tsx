@@ -37,7 +37,7 @@ const VideoFeed = () => {
     await peerConnection.close();
     endCall();
     endLocalStream();
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
@@ -69,22 +69,20 @@ const VideoFeed = () => {
             muted={isMuted}
             className="absolute -z-10 w-full h-full object-cover"
           />
-          {guestStream && (
-            <video
-              ref={(ref) => {
-                if (ref) {
-                  ref.srcObject = localStream;
-                }
-              }}
-              autoPlay={true}
-              muted={isMuted}
-              className="absolute right-11 top-11 w-36 border-2 border-white/50"
-            />
-          )}
+          <video
+            ref={(ref) => {
+              if (ref) {
+                ref.srcObject = localStream;
+              }
+            }}
+            autoPlay={true}
+            muted={isMuted}
+            className="absolute right-11 top-11 w-36 border-2 border-white/50"
+          />
         </div>
         <div className={twMerge("p-11 flex-1", isGuestPlaying && "opacity-0")}>
           <div className="z-50">
-            <h1 className="header1 text-4xl">Michael Akinsola</h1>
+            <h1 className="header1 text-4xl">Onibon Yetunde</h1>
             <p className="">Educator</p>
             <p className="mt-5 italic border-t border-b w-fit">
               {!guestStream ? "Calling..." : "Connecting..."}
