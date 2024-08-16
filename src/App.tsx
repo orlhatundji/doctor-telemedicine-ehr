@@ -20,7 +20,7 @@ import { useAuth } from "./contexts/authContext";
 function App() {
   const { isAuthenticated } = useAuth();
   return (
-    <Router>
+    <Router basename="/">
       <InstallButton />
       <Suspense fallback={<Loader />}>
         <Routes>
