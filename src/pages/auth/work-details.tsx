@@ -66,7 +66,7 @@ const WorkDetails: React.FC<WorkDetailsProps> = () => {
       />
 
       <Button title="Next" className="w-full"
-        onClick={() => navigate("/doctor-telemedicine-ehr/")}
+        onClick={() => navigate("/")}
       />
     </form>
   );

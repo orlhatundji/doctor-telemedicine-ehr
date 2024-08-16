@@ -1,1 +1,1 @@
-export const base_url = "doctor-telemedicine-ehr"
+export const base_url = "";

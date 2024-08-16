@@ -89,7 +89,7 @@ const Sidebar = ({
     setActiveRoute(route.name);
     setActiveRouteId(id);
     setPageTitle(route.name);
-    navigate(`/${base_url}${route.to}`);
+    navigate(`${route.to}`);
   };
 
   return (

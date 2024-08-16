@@ -54,7 +54,7 @@ const WithFixedSidebar = () => {
                 path="/appointments"
                 element={<AppointmentsPage />}
               />
-              <Route path="*" element={<Navigate to={"/doctor-telemedicine-ehr/"} replace />} />
+              {/* <Route path="*" element={<Navigate to={"/"} replace />} /> */}
             </Routes>
           </Suspense>
         </div>

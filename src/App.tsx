@@ -21,16 +21,16 @@ function App() {
   const { isAuthenticated } = useAuth();
   return (
     <Router basename="/">
-      <InstallButton />
+      {/* <InstallButton /> */}
       <Suspense fallback={<Loader />}>
         <Routes>
           {!isAuthenticated ? (
             <>
-              <Route path="/doctor-telemedicine-ehr/auth" element={<Auth />} />
+              <Route path="/auth" element={<Auth />} />
               <Route
                 path="*"
                 element={
-                  <Navigate to={"/doctor-telemedicine-ehr/auth"} replace />
+                  <Navigate to={"/auth"} replace />
                 }
               />
 
@@ -38,15 +38,15 @@ function App() {
           ) : (
             <>
               <Route
-                path="/doctor-telemedicine-ehr/*"
+                path="/*"
                 index
                 element={<WithFixedSidebar />}
               />
 
-              <Route
+              {/* <Route
                 path="*"
-                element={<Navigate to={"/doctor-telemedicine-ehr/"} replace />}
-              />
+                element={<Navigate to={"/"} replace />}
+              /> */}
             </>
           )}
         </Routes>
