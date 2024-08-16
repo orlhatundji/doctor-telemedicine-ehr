@@ -50,7 +50,7 @@ const PersonalProfile = () => {
     >
       <div className="max-w-[668px]">
         {/* <DoctorImage className="mt-8" /> */}
-        <img src={DoctorImage} alt="" className="mt-8" />
+        <img src={DoctorImage} alt="" className="mt-8 max-w-[96px] max-h-[96px] rounded-full" />
         <h3 className="header3 text-base mt-7 text-primary">Personal Info</h3>
         <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5">
           {records.map((record, i) => (

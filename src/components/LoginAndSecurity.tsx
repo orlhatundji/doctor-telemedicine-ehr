@@ -12,7 +12,7 @@ const records = [
   {
     title: "Password",
     response: "********",
-    actionPage: "/doctor-telemedicine-ehr/reset-password",
+    actionPage: "/reset-password",
   },
 ];
 const LoginAndSecurity = () => {

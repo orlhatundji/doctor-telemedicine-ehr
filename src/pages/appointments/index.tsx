@@ -24,7 +24,7 @@ const AppointmentsPage: React.FC = () => {
   // const { startCall } = React.useContext(CallContext);
   const handleCalendarClick = (event: any) => {
     // startCall();
-    navigate(`/doctor-telemedicine-ehr/meeting`);
+    navigate(`/meeting`);
     // alert(`Event scheduled for ${event.start} to ${event.end}`);
   };
   const [appointments, setAppointments] = React.useState([]);
