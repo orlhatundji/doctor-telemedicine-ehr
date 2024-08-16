@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ZoomComponent = () => {
   const navigate = useNavigate();
   var sessionContainer;
-  var authEndpoint = `${process.env.REACT_APP_API_URL}/zoom/session`;
+  var authEndpoint = `${process.env.REACT_APP_BACKEND_API_URL}/zoom/session`;
   var config = {
     videoSDKJWT: "",
     sessionName: "consultation",
