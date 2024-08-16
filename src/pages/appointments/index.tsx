@@ -6,70 +6,25 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 // Custom Hooks
 import useScreenSize from "../../hooks/useScreenSize";
-import { CallContext } from "../../contexts/callContext";
+// import { CallContext } from "../../contexts/callContext";
 
 // Assets
 import person from "../../assets/images/person.svg";
 import video_icon from "../../assets/images/video_icon.png";
 import { axiosInstance } from "../../utils/baseAxios";
 import { add30Minutes } from "../../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 const localizer = dayjsLocalizer(dayjs);
 
 const AppointmentsPage: React.FC = () => {
-  // Sample event list
-  const myEventsList = [
-    {
-      id: 1,
-      title: "Meeting",
-      person: { name: "Gbenga Akintubi" },
-      agenda:
-        "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
-      start: new Date(2024, 6, 1, 10, 0), // July 1, 2024, 10:00 AM
-      end: new Date(2024, 6, 1, 12, 0), // July 1, 2024, 12:00 PM
-    },
-    {
-      id: 2,
-      title: "Check-up",
-      person: { name: "Ayelabola Ololade" },
-      agenda:
-        "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
-      start: new Date(2024, 6, 3, 14, 0), // July 3, 2024, 2:00 PM
-      end: new Date(2024, 6, 3, 17, 0), // July 3, 2024, 5:00 PM
-    },
-    {
-      id: 3,
-      title: "Consultation",
-      person: { name: "Dayo Dansule" },
-      agenda:
-        "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
-      start: new Date(2024, 6, 5, 7, 30), // July 5, 2024, 7:30 AM
-      end: new Date(2024, 6, 5, 10, 30), // July 5, 2022, 10:30 AM
-    },
-    {
-      id: 14,
-      title: "Today's Consultation",
-      person: { name: "Onibon Yetunde" },
-      agenda:
-        "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
-      start: new Date(new Date().setHours(new Date().getHours() - 3)),
-      end: new Date(new Date().setHours(new Date().getHours() + 3)),
-    },
-    {
-      id: 14,
-      title: "Consultation with Kunle",
-      person: { name: "Fagbenro Memunat" },
-      agenda:
-        "Lorem ipsum dolor sit amet consectetur. Placerat quis non sed erat. Elementum nisi sapien enim at faucibus facilisi nisl pulvinar. Sed penatibus nisi ultrices phasellus lacus. Commodo quis a est rhoncus viverra nibh in imperdiet tristique. Netus non duis iaculis in fringilla nec ut in a.",
-      start: new Date(new Date().setHours(new Date().getHours() + 3)),
-      end: new Date(new Date().setHours(new Date().getHours() + 5)),
-    },
-  ];
+  const navigate = useNavigate();
 
   const { height } = useScreenSize();
-  const { startCall } = React.useContext(CallContext);
+  // const { startCall } = React.useContext(CallContext);
   const handleCalendarClick = (event: any) => {
-    startCall();
+    // startCall();
+    navigate(`/doctor-telemedicine-ehr/meeting`);
     // alert(`Event scheduled for ${event.start} to ${event.end}`);
   };
   const [appointments, setAppointments] = React.useState([]);

@@ -1,4 +1,4 @@
-import { Suspense, useContext } from "react";
+import { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,13 +6,10 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { CallContext } from "./contexts/callContext";
-
 // Components
 import InstallButton from "./components/InstallButton";
 import Loader from "./components/Loader";
 import WithFixedSidebar from "./components/Layout";
-import VideoCall from "./components/VideoFeed";
 
 // Pages
 import Auth from "./pages/auth";
@@ -21,12 +18,10 @@ import Auth from "./pages/auth";
 import { useAuth } from "./contexts/authContext";
 
 function App() {
-  const { isCallActive } = useContext(CallContext);
   const { isAuthenticated } = useAuth();
   return (
     <Router>
       <InstallButton />
-      {isCallActive && <VideoCall />}
       <Suspense fallback={<Loader />}>
         <Routes>
           {!isAuthenticated ? (
@@ -38,6 +33,7 @@ function App() {
                   <Navigate to={"/doctor-telemedicine-ehr/auth"} replace />
                 }
               />
+
             </>
           ) : (
             <>
