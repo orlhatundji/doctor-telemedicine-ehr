@@ -27,7 +27,7 @@ const WithFixedSidebar = () => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <Topbar title={pageTitle} />
-        <div className="flex-1 px-6 py-8 relative">
+        <div className="flex-1 px-6 py-8">
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<OverviewPage />} />
@@ -54,7 +54,7 @@ const WithFixedSidebar = () => {
                 path="/appointments"
                 element={<AppointmentsPage />}
               />
-              {/* <Route path="*" element={<Navigate to={"/"} replace />} /> */}
+              <Route path="*" element={<Navigate to={"/"} replace />} />
             </Routes>
           </Suspense>
         </div>

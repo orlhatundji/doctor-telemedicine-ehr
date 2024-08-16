@@ -15,7 +15,7 @@ const MyPdfViewer = ({ title, path, show, setShow }: MyPdfViewerProps) => {
   
   return (
     <Modal {...{ title, show, setShow }} withClose>
-      <div className="h-[65vh] w-[80vw]">
+      <div className=" w-[70vw]">
         <div
           className="embed-responsive"
          

@@ -58,7 +58,7 @@ const ZoomComponent = () => {
   };
 
   return (
-    <div className="absolute overflow-auto inset-x-20 inset-y-5 h-full flex flex-col items-center justify-center mx-auto pb-10">
+    <div className="overflow-auto inset-x-20 inset-y-5 h-full flex flex-col items-center justify-center mx-auto pb-10">
      <div
         id="sessionContainer"
         className="w-full max-h-full"
