@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "../../../components/Button";
 
 // Assets
-import { ReactComponent as DoctorImage } from "../../../assets/images/doctor.svg";
+import  DoctorImage from "../../../assets/images/doctor.png";
 import license from "../../../assets/images/license.png";
 import useScreenSize from "../../../hooks/useScreenSize";
 
@@ -49,7 +49,8 @@ const PersonalProfile = () => {
       style={{ maxHeight: `${height - 200}px` }}
     >
       <div className="max-w-[668px]">
-        <DoctorImage className="mt-8" />
+        {/* <DoctorImage className="mt-8" /> */}
+        <img src={DoctorImage} alt="" className="mt-8" />
         <h3 className="header3 text-base mt-7 text-primary">Personal Info</h3>
         <div className="grid grid-cols-2 gap-x-10 gap-y-3 mt-5">
           {records.map((record, i) => (
