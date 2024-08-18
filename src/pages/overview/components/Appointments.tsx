@@ -51,7 +51,6 @@ const Appointments = () => {
 
   useEffect(() => {
     axiosInstance.get("/appointment").then((res) => {
-      console.log('appointments', res.data)
       let apptms = res.data.map((appointment: any) => {
         const date = new Date(appointment.date);
         return {

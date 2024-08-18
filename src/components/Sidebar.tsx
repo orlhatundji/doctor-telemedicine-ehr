@@ -16,7 +16,11 @@ import { ReactComponent as AppointmentsActiveIcon } from "../assets/icons/appoin
 import { ReactComponent as AppointmentsInActiveIcon } from "../assets/icons/appointments_inactive.svg";
 import { ReactComponent as ReviewsActiveIcon } from "../assets/icons/reviews_active.svg";
 import { ReactComponent as ReviewsInActiveIcon } from "../assets/icons/reviews_inactive.svg";
+import { ReactComponent as MessagesActiveIcon } from "../assets/icons/messages-outline.svg";
+import { ReactComponent as MessagesInActiveIcon } from "../assets/icons/messages-filled.svg";
+import { ReactComponent as LogoutIcon } from "../assets/icons/logout.svg";
 import { ReactComponent as PlatformLogo } from "../assets/icons/platform_logo.svg";
+import { useAuth } from "../contexts/authContext";
 
 type Route = {
   id: number;
@@ -76,6 +80,24 @@ const routes: Route[] = [
     },
     to: "/settings",
   },
+  {
+    id: 5,
+    name: "Messages",
+    icons: {
+      active: <MessagesActiveIcon />,
+      inactive: <MessagesInActiveIcon />,
+    },
+    to: "/messages",
+  },
+  {
+    id: 5,
+    name: "Logout",
+    icons: {
+      active: <LogoutIcon />,
+      inactive: <LogoutIcon />,
+    },
+    to: `${base_url}/logout`,
+  },
 ];
 const Sidebar = ({
   setPageTitle,
@@ -85,7 +107,13 @@ const Sidebar = ({
   const navigate = useNavigate();
   const [activeRoute, setActiveRoute] = React.useState(routes[0].name);
   const [activeRouteId, setActiveRouteId] = React.useState(routes[0].id);
+  const { logout } = useAuth();
   const activeRouteHandler = (route: Route, id: number) => {
+    if (route.name === "Logout") {
+      logout();
+      navigate(`${route.to}`);
+      return; 
+    }
     setActiveRoute(route.name);
     setActiveRouteId(id);
     setPageTitle(route.name);

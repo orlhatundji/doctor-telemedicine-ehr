@@ -18,6 +18,7 @@ import PatientDetailsPage from "../pages/patients/details";
 import ReviewsPage from "../pages/reviews";
 import SettingsPage from "../pages/settings";
 import ZoomComponent from "./ZoomComponent";
+import ChatPage from "../chat";
 
 const WithFixedSidebar = () => {
   const [pageTitle, setPageTitle] = useState<string>("Overview");
@@ -53,6 +54,10 @@ const WithFixedSidebar = () => {
               <Route
                 path="/appointments"
                 element={<AppointmentsPage />}
+              />
+              <Route
+                path="/messages"
+                element={<ChatPage />}
               />
               <Route path="*" element={<Navigate to={"/"} replace />} />
             </Routes>

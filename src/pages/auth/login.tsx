@@ -23,7 +23,12 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      login(accessToken);
+      login(
+        accessToken,
+        localStorage.getItem("email") || "",
+        parseInt(localStorage.getItem("id") || "0"),
+        localStorage.getItem("role") || ""
+      );
     } }, [login]);
     
   const onSubmit = async (data: { email: string; password: string; }) => {
@@ -31,8 +36,13 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
       email: data.email,
       password: data.password,
     }).then((res) => {
-      console.log(res.data);
-      login(res.data.access_token);
+      login(
+        res.data.access_token,
+        res.data.email,
+        res.data.id,
+        res.data.role
+      );
+      
       localStorage.setItem("email", data.email);
       setStep(0);
     }).catch((error) => {
