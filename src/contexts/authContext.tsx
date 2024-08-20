@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (token: string, email: string, id: number, role: string) => void;
+  login: (token: string, email: string, id: number, role: string, iName: string) => void;
   logout: () => void;
   checkAuth: () => void;
 }
@@ -16,11 +16,12 @@ type AuthProviderProps = {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const login = (token: string, email: string, id: number, role: string) => {
+  const login = (token: string, email: string, id: number, role: string, iName: string) => {
     localStorage.setItem('accessToken', token);
     localStorage.setItem('email', email);
     localStorage.setItem('id', id.toString());
     localStorage.setItem('role', role);
+    localStorage.setItem('name', iName);
     setIsAuthenticated(true);
   };
 
@@ -29,6 +30,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('email');
     localStorage.removeItem('id');
     localStorage.removeItem('role');
+    localStorage.removeItem('name');
     setIsAuthenticated(false);
   };
 

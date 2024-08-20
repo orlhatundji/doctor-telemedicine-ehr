@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 // Constants
-import { base_url } from "../utils/constants";
+import { ROLE } from "../utils/constants";
 
 // Assets
 import { ReactComponent as DashboardActiveIcon } from "../assets/icons/dashboard_active.svg";
@@ -33,7 +33,8 @@ type Route = {
   to: string;
 };
 
-const routes: Route[] = [
+const doctorRoutes: Route[] = [
+
   {
     id: 0,
     name: "Overview",
@@ -96,7 +97,36 @@ const routes: Route[] = [
       active: <LogoutIcon />,
       inactive: <LogoutIcon />,
     },
-    to: `${base_url}/logout`,
+    to: ""
+  },
+];
+const hospitalRoutes: Route[] = [
+  {
+    id: 0,
+    name: "Patients",
+    icons: {
+      active: <DashboardActiveIcon />,
+      inactive: <DashboardInActiveIcon />,
+    },
+    to: "/patients",
+  },
+  {
+    id: 1,
+    name: "Doctors",
+    icons: {
+      active: <SettingsActiveIcon />,
+      inactive: <SettingsInActiveIcon />,
+    },
+    to: "/doctors",
+  },
+  {
+    id: 2,
+    name: "Logout",
+    icons: {
+      active: <LogoutIcon />,
+      inactive: <LogoutIcon />,
+    },
+    to: "",
   },
 ];
 const Sidebar = ({
@@ -105,6 +135,8 @@ const Sidebar = ({
   setPageTitle: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
+  const routes = role === ROLE.DOCTOR ? doctorRoutes : hospitalRoutes;
   const [activeRoute, setActiveRoute] = React.useState(routes[0].name);
   const [activeRouteId, setActiveRouteId] = React.useState(routes[0].id);
   const { logout } = useAuth();
