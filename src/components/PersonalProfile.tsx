@@ -3,17 +3,36 @@ import { useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import { removeNull } from "../utils/helpers";
 
-const PatientDetails = ({ patient }: { patient: any }) => {
+const UserDetails = ({ user }: { user: any }) => {
   const { height } = useScreenSize();
-  const cardHeight = `${height - 450}px`;
+  const cardHeight = `${height - 400}px`;
   const [records, setRecords] = useState<any[]>([]);
   useEffect(() => {
-    const patientArray = Object.entries(removeNull(patient)).map(([key, value]) => ({
+    const userArray = Object.entries(removeNull(user)).map(([key, value]) => ({
       title: key,
       response: value,
     }));
-    setRecords(removeNull(patientArray));
-  }, [patient]);
+    setRecords(removeNull(userArray));
+  }, [user]);
+
+  const keyToHeader = (key: string) => {
+    switch (key) {
+      case "dateOfBirth":
+        return "Date of birth";
+      case "emergencyContact":
+        return "Emergency contact";
+      case "nextOfKin":
+        return "Next of kin";
+      case "nextOfKinRelationship":
+        return "Next of kin relationship";
+      case "maritalStatus":
+        return "Marital status";
+      case "patientCount":
+        return "Patient count";
+      default:
+        return key;
+    }
+  }
 
   return (
     <div
@@ -23,7 +42,7 @@ const PatientDetails = ({ patient }: { patient: any }) => {
       {records.map((record: any, i: number) => (
         <div key={i} className="flex flex-col py-2">
           <div className="flex">
-            <h3 className="font-semibold capitalize">{record.title}</h3>
+            <h3 className="font-semibold capitalize">{keyToHeader(record.title)}</h3>
           </div>
           <span className="text-grey-100 text-sm capitalize">{record.response}</span>
         </div>
@@ -32,4 +51,4 @@ const PatientDetails = ({ patient }: { patient: any }) => {
   );
 };
 
-export default PatientDetails;
+export default UserDetails;

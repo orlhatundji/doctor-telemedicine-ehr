@@ -14,7 +14,13 @@ import Input from "../../../components/Input";
 import Dropdown from "../../../components/Dropdown";
 import { Button } from "../../../components/Button";
 
-const MedicalProfileForm = ({ patient, id }: { patient: Record<string, any>, id: string | undefined }) => {
+const MedicalProfileForm = ({
+  patient,
+  id,
+}: {
+  patient: Record<string, any>;
+  id: string | undefined;
+}) => {
   const {
     register,
     handleSubmit,
@@ -23,9 +29,7 @@ const MedicalProfileForm = ({ patient, id }: { patient: Record<string, any>, id:
   } = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {
-      
-    },
+    defaultValues: {},
   });
   const navigate = useNavigate();
   const [gender, setGender] = useState<{ value: string; label: string } | null>(
@@ -38,7 +42,7 @@ const MedicalProfileForm = ({ patient, id }: { patient: Record<string, any>, id:
   } | null>(null);
 
   useEffect(() => {
-    if(!patient || !id) return;
+    if (!patient || !id) return;
     const fetchUpdatedValues = async () => {
       const {
         name,
@@ -75,26 +79,29 @@ const MedicalProfileForm = ({ patient, id }: { patient: Record<string, any>, id:
 
   const onSubmit = (data: Record<string, any>) => {
     if (!id) return;
-    setLoading(true)
-    axiosInstance.patch(`/patient/${id}`, removeNull(data)).then((res) => {
-      navigate(-1)
-    } ).catch((error) => {
-      console.error(error);
-    } );
-    setLoading(false)
+    setLoading(true);
+    axiosInstance
+      .patch(`/users/${id}`, removeNull(data))
+      .then((res) => {
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setLoading(false);
   };
 
   return (
     <form
-      className="overflow-y-scroll pr-10 h-full pb-10"
+      className="overflow-y-scroll pr-10 h-[90%] pb-10"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <Input
             name="name"
-            label="Patient's Name"
-            placeholder="Enter patient's name"
+            label="Name"
+            placeholder="Enter name"
             defaultValue={patient.name}
             {...{ register, errors }}
           />

@@ -36,7 +36,7 @@ const PatientDetails = () => {
         </div>
         {role === ROLE.HOSPITAL && (
           <Button title="Edit" className="absolute right-0 w-fit px-8 py-2"
-          onClick={() => navigate("edit")}
+          onClick={() => navigate("edit", { state: patient })}
           />
         )}
       </div>
@@ -58,7 +58,7 @@ const PatientDetails = () => {
           />
 
           {step === 0 && <MedicalCard />}
-          {step === 1 && <PersonalProfile {...{ patient }} />}
+          {step === 1 && <PersonalProfile user={patient} />}
         </div>
         {role === ROLE.DOCTOR && (
           <div className="flex flex-col gap-y-6">

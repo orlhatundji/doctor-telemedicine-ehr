@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 // Utils
 import { axiosInstance } from "../../utils/baseAxios";
@@ -10,22 +10,23 @@ import BackButton from "../../components/BackArrow";
 import MedicalHistoryForm from "./components/MedicalHistoryForm";
 import MedicalProfileForm from "./components/MedicalProfileForm";
 
-const EditPatient = () => {
+const EditUser = () => {
   const navigate = useNavigate();
   const [editMode, setEditMode] = useState<"profile" | "history">("profile");
-  const [patient, setPatient] = useState({});
+  const [userDetails, setUserDetails] = useState({});
   const params = useParams();
+  const { patient, doctor } = useLocation().state;
   const id = params.id;
   useEffect(() => {
     axiosInstance
-      .get(`/patient/unique?id=${id}`)
+      .get(`/${patient ? "patient" : "doctor"}/unique?id=${id}`)
       .then((res) => {
-        setPatient(res.data);
+        setUserDetails(res.data);
       })
       .catch((error) => {
         console.log("error", error);
       });
-  }, [id]);
+  }, [id, patient]);
   return (
     <div className="h-[80vh]">
       <div className="flex items-center relative">
@@ -34,12 +35,11 @@ const EditPatient = () => {
             className="hover:underline cursor-pointer underline-offset-8"
             onClick={() => navigate(-1)}
           >
-            Patients
+            {patient ? "Patients" : "Doctors"}
           </span>
-          /<span className="">Patient details</span>/
+          /<span className="">{patient ? "Patient" : "Doctor"} details</span>/
           <span className="">Edit</span>
         </div>
-        <Button title="Save" className="absolute right-14 w-fit px-8 py-2" />
       </div>
       <div className="mt-4 h-full">
         <BackButton />
@@ -51,18 +51,24 @@ const EditPatient = () => {
             onClick={() => setEditMode("profile")}
           />
 
-          <Button
-            title="Medical History"
-            color={editMode === "history" ? "primary" : "secondary"}
-            className="w-fit px-8"
-            onClick={() => setEditMode("history")}
-          />
+          {patient && (
+            <Button
+              title="Medical History"
+              color={editMode === "history" ? "primary" : "secondary"}
+              className="w-fit px-8"
+              onClick={() => setEditMode("history")}
+            />
+          )}
         </div>
-        {editMode === "history" && <MedicalHistoryForm {...{ patient, id }} />}
-        {editMode === "profile" && <MedicalProfileForm {...{ patient, id }} />}
+        {editMode === "history" && (
+          <MedicalHistoryForm patient={userDetails} {...{ id }} />
+        )}
+        {editMode === "profile" && (
+          <MedicalProfileForm patient={userDetails} {...{ id }} />
+        )}
       </div>
     </div>
   );
 };
 
-export default EditPatient;
+export default EditUser;

@@ -75,12 +75,9 @@ const HospitalPatientsPage: React.FC = () => {
               <th className="border px-4 py-4 text-center">Phone</th>
               <th className="border px-4 py-4 text-center">Gender</th>
               <th className="border px-4 py-4 text-center">Marital Status</th>
-              <th className="border px-4 py-4 text-center">Occupation</th>
               <th className="border px-4 py-4 text-center">
                 Emergency Contact
               </th>
-              <th className="border px-4 py-4 text-center">Next of Kin</th>
-              <th className="border px-4 py-4 text-center">Rel. with NOK</th>
             </tr>
           </thead>
           <tbody>
@@ -99,23 +96,14 @@ const HospitalPatientsPage: React.FC = () => {
                 <td className="border px-4 py-4 text-center">
                   {patient.phone || "-"}
                 </td>
-                <td className="border px-4 py-4 text-center capitalize">
+                <td className="border px-4 py-4 text-center lowercase">
                   {patient.gender}
                 </td>
-                <td className="border px-4 py-4 text-center">
+                <td className="border px-4 py-4 text-center lowercase">
                   {patient.maritalStatus}
-                </td>
-                <td className="border px-4 py-4 text-center capitalize">
-                  {patient.occupation || "-"}
                 </td>
                 <td className="border px-4 py-4 text-center">
                   {patient.emergencyContact || "-"}
-                </td>
-                <td className="border px-4 py-4 text-center capitalize">
-                  {patient.nextOfKin || "-"}
-                </td>
-                <td className="border px-4 py-4 text-center capitalize">
-                  {patient.nextOfKinRelationship || "-"}
                 </td>
                 <td className="border px-4 py-4 text-center">
                   <div className="p-2 bg-secondary-300 rounded flex items-center justify-center">

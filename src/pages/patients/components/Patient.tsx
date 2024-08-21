@@ -9,11 +9,8 @@ import { twMerge } from "tailwind-merge";
 type PatientProps = {
   name: string;
   age: number;
-  upComingVisit: string;
-  recentVisit: string;
   email: string;
   phone: string;
-  noOfVisits: number;
   showViewMore?: boolean;
   className?: string;
   size?: "sm" | "md";
@@ -22,11 +19,8 @@ type PatientProps = {
 const Patient: React.FC<PatientProps> = ({
   name,
   age,
-  upComingVisit,
-  recentVisit,
   email,
   phone,
-  noOfVisits,
   showViewMore,
   className = "border rounded-lg",
   size = "sm",
@@ -56,7 +50,7 @@ const Patient: React.FC<PatientProps> = ({
               {name}
             </h2>
             <span className="text-xs text-grey-100">
-              {age} years | {noOfVisits} visits
+              {age} years | visits
             </span>
           </div>
         </div>

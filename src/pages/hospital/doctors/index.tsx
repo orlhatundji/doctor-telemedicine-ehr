@@ -10,9 +10,11 @@ import SearchInput from "../../../components/SearchInput";
 // Assets
 import { ReactComponent as EditIcon } from "../../../assets/icons/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../../assets/icons/delete.svg";
-
+import { useNavigate } from "react-router-dom";
+import { getAge } from "../../../utils/helpers";
 
 const HospitalDoctorsPage: React.FC = () => {
+  const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
   const [queryDoctors, setQueryDoctors] = useState(doctors);
   const handleSearch = (query: string) => {
@@ -26,16 +28,21 @@ const HospitalDoctorsPage: React.FC = () => {
       .get("/doctor")
       .then((res) => {
         const doctors = res.data.map((doctor: any) => {
+          const user = doctor.user;
           return {
-            id: doctor.id,
-            name: doctor.user.name,
-            age: doctor.age || Math.floor(Math.random() * (65 - 27 + 1)) + 27,
-            email: doctor.user?.email,
-            phone: doctor.phone,
             specialty: doctor.specialty,
-            patientCount:
-              doctor.patientCount ||
-              Math.floor(Math.random() * (50 - 3 + 1)) + 3,
+            patientCount: doctor._count.assignedPatients,
+            id: user.id,
+            name: user.name,
+            age: getAge(user.dateOfBirth),
+            email: user.email,
+            phone: user.phone,
+            gender: user.gender,
+            maritalStatus: user.maritalStatus,
+            occupation: user.occupation,
+            emergencyContact: user.emergencyContact,
+            nextOfKin: user.nextOfKin,
+            nextOfKinRelationship: user.nextOfKinRelationship,
           };
         });
         setDoctors(doctors);
@@ -70,7 +77,10 @@ const HospitalDoctorsPage: React.FC = () => {
         <tbody>
           {queryDoctors.map((doctor: any) => (
             <tr key={doctor.id} className="">
-              <td className="border px-8 py-4 whitespace-nowrap ">
+              <td
+                className="border px-8 py-4 whitespace-nowrap cursor-pointer"
+                onClick={() => navigate(`${doctor.id}`, { state: doctor })}
+              >
                 {doctor.name}
               </td>
               <td className="border px-8 py-4 text-center">{doctor.age}</td>
