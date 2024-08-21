@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Utils
+import { getAge } from "../../../utils/helpers";
 import { axiosInstance } from "../../../utils/baseAxios";
 
 // Components
 import { Button } from "../../../components/Button";
 import SearchInput from "../../../components/SearchInput";
+import DeletePrompt from "../patients/components/DeletePrompt";
+import NewDoctorForm from "./components/NewPatientForm";
 
 // Assets
 import { ReactComponent as EditIcon } from "../../../assets/icons/edit.svg";
-import { ReactComponent as DeleteIcon } from "../../../assets/icons/delete.svg";
-import { useNavigate } from "react-router-dom";
-import { getAge } from "../../../utils/helpers";
 
 const HospitalDoctorsPage: React.FC = () => {
   const navigate = useNavigate();
+  const [showAddDoctorModal, setShowAddDoctorModal] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [queryDoctors, setQueryDoctors] = useState(doctors);
   const handleSearch = (query: string) => {
@@ -34,7 +36,7 @@ const HospitalDoctorsPage: React.FC = () => {
             patientCount: doctor._count.assignedPatients,
             id: user.id,
             name: user.name,
-            age: getAge(user.dateOfBirth),
+            age: getAge(user.dateOfBirth) || "-",
             email: user.email,
             phone: user.phone,
             gender: user.gender,
@@ -59,9 +61,15 @@ const HospitalDoctorsPage: React.FC = () => {
         <div className="w-fit ">
           <SearchInput placeholder="Search doctors" onSearch={handleSearch} />
         </div>
-        <Button className="w-fit px-4" title="Add Doctor" />
+        <Button
+          className="w-fit px-4"
+          title={showAddDoctorModal ? "Cancel" : "Add Doctor"}
+          onClick={() => setShowAddDoctorModal((prev) => !prev)}
+        />
       </div>
 
+
+      <div className="w-full max-w-full max-h-full overflow-auto pb-10 pr-5">
       <table className="w-full table-auto border-collapse border shadow-lg mt-10">
         <thead>
           <tr className="">
@@ -99,13 +107,18 @@ const HospitalDoctorsPage: React.FC = () => {
                   <EditIcon className="cursor-pointer" />
                 </div>
               </td>
-              <td className="border px-4 py-4 text-center">
-                <DeleteIcon className="cursor-pointer" />
+              <td className="border px-4 py-4 text-center relative">
+                <DeletePrompt id={doctor.id} isDoctor />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <NewDoctorForm
+        show={showAddDoctorModal}
+        setShow={setShowAddDoctorModal}
+      />
+      </div>
     </>
   );
 };

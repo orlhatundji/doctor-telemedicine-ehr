@@ -10,21 +10,20 @@ import { Button } from "../../../../components/Button";
 // Assets
 import { ReactComponent as DeleteIcon } from "../../../../assets/icons/delete.svg";
 
-const DeletePrompt = ({ id }: { id: string }) => {
+const DeletePrompt = ({ id, isDoctor = false }: { id: string, isDoctor?: boolean }) => {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleDelete = () => {
     setLoading(true);
     axiosInstance
-      .delete(`/patient/${id}`)
+      .delete(`/${isDoctor ? 'doctor': 'patient'}/${id}`)
       .then((res) => {
-        console.log("deleted", res.data);
+        setShow(false)
       })
       .catch((error) => {
         console.error(error);
       });
       setLoading(false)
-      setShow(false)
   };
   return (
     <div>

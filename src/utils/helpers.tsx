@@ -10,6 +10,7 @@ export const add30Minutes = (date: Date) => {
 }
 
 export const getAge = (date: Date) => {
+  if (!date) return 0;
   const today = new Date();
   const birthDate = new Date(date);
   let age = today.getFullYear() - birthDate.getFullYear();
