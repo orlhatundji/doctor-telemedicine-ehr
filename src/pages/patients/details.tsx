@@ -41,7 +41,7 @@ const PatientDetails = () => {
         )}
       </div>
       <div
-        className={twMerge("grid mt-4", role === ROLE.DOCTOR && "grid-cols-2")}
+        className={twMerge("mt-4", role === ROLE.DOCTOR && "grid-cols-2")}
       >
         <div
           className={twMerge(

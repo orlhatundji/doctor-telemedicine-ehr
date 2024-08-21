@@ -25,6 +25,26 @@ export const removeNull = (obj: any) => {
   Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] === '') && delete obj[key]);
   return obj;
 }
+
+export const keyToHeader = (key: string) => {
+  switch (key) {
+    case "dateOfBirth":
+      return "Date of birth";
+    case "emergencyContact":
+      return "Emergency contact";
+    case "nextOfKin":
+      return "Next of kin";
+    case "nextOfKinRelationship":
+      return "Next of kin relationship";
+    case "maritalStatus":
+      return "Marital status";
+    case "patientCount":
+      return "Patient count";
+    default:
+      return key;
+  }
+};
+
 export const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };

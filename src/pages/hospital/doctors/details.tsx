@@ -29,7 +29,7 @@ const DoctorDetailsPage = () => {
           onClick={() => navigate("edit", { state: doctor })}
         />
       </div>
-      <div className={twMerge("grid mt-4")}>
+      <div className={twMerge("h-full mt-4")}>
         <div className={twMerge("border rounded-lg")}>
           <Patient {...doctor } className="" size="md" />
           <PersonalProfile user={doctor} />

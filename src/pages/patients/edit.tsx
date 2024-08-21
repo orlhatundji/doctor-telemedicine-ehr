@@ -15,7 +15,7 @@ const EditUser = () => {
   const [editMode, setEditMode] = useState<"profile" | "history">("profile");
   const [userDetails, setUserDetails] = useState({});
   const params = useParams();
-  const { patient, doctor } = useLocation().state;
+  const { patient } = useLocation().state;
   const id = params.id;
   useEffect(() => {
     axiosInstance

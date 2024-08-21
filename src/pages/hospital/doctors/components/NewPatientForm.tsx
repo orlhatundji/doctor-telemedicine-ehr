@@ -25,7 +25,6 @@ const NewDoctorForm: React.FC<NewDoctorFormProps> = ({ show, setShow }) => {
     },
   });
   const onSubmit = (data: Record<string, string>) => {
-    console.log(data);
     setLoading(true);
     axiosInstance
       .post("/doctor", data)

@@ -39,7 +39,6 @@ const WithFixedSidebar = () => {
                 <>
                   <Route path="/" element={<OverviewPage />} />
                   <Route path="/meeting" element={<ZoomComponent />} />
-
                   <Route path="/overview" element={<OverviewPage />} />
                   <Route path="/patients" element={<PatientsPage />} />
                   <Route path="/reviews" element={<ReviewsPage />} />
@@ -51,6 +50,7 @@ const WithFixedSidebar = () => {
               )}
               {role === ROLE.HOSPITAL && (
                 <>
+                  <Route path="/" element={<HospitalPatientsPage />} />
                   <Route path="/patients" element={<HospitalPatientsPage />} />
                   <Route path="/doctors" element={<HospitalDoctorsPage />} />
                   <Route path="/doctors/:id" element={<DoctorDetailsPage />} />
