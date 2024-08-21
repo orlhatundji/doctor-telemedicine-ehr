@@ -68,7 +68,7 @@ const Patient: React.FC<PatientProps> = ({
           />
         )}
       </div>
-      <div className="flex items-center gap-x-8 mt-8">
+      {/* <div className="flex items-center gap-x-8 mt-8">
         <div className="flex flex-col gap-y-0">
           <span className="font-bold text-sm ">Upcoming Visit</span>
           <span className="text-sm text-grey-100">{upComingVisit}</span>
@@ -77,7 +77,7 @@ const Patient: React.FC<PatientProps> = ({
           <span className="font-bold text-sm ">Recent Visit</span>
           <span className="text-sm text-grey-100">{recentVisit}</span>
         </div>
-      </div>
+      </div> */}
       <div className="flex items-center gap-x-8 mt-6">
         <div className="flex flex-col gap-y-0">
           <span className="font-bold text-sm ">Email</span>

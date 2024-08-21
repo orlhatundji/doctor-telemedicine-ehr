@@ -9,6 +9,21 @@ export const add30Minutes = (date: Date) => {
   return d;
 }
 
+export const getAge = (date: Date) => {
+  const today = new Date();
+  const birthDate = new Date(date);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+export const removeNull = (obj: any) => {
+  Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] === '') && delete obj[key]);
+  return obj;
+}
 export const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };

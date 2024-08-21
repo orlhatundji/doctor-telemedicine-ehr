@@ -50,7 +50,6 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
         password: data.password,
       })
       .then((res) => {
-        console.log(res.data);
         login(
           res.data.access_token,
           res.data.email,
@@ -58,13 +57,11 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
           res.data.role,
           res.data.name,
         );
-
         localStorage.setItem("email", data.email);
         setStep(0);
       })
       .catch((error) => {
         console.error(error);
-        console.log(error.response);
         setError(error.response.data.message);
       });
     setLoading(false);

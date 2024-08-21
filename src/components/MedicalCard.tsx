@@ -13,12 +13,12 @@ const records = [
     response: ["Peanuts", "Dust", "Mold", "Pet dander", "lactose intolerant"],
   },
   {
-    title: "Alcohol consumption",
-    response: ["Daily"],
-  },
-  {
     title: "Past Medical conditions",
     response: ["Malaria", "Typhoid", "Tuberculosis", "Hepatitis", "Surgery"],
+  },
+  {
+    title: "Alcohol consumption",
+    response: ["Daily"],
   },
   {
     title: "Blood group",
@@ -27,10 +27,6 @@ const records = [
   {
     title: "Genotype",
     response: ["AA"],
-  },
-  {
-    title: "Family history",
-    response: ["Diabetes", "Hypertension", "Asthma", "Sickle cell"],
   },
   {
     title: "Current medications",

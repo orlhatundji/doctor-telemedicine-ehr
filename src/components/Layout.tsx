@@ -20,6 +20,7 @@ import HospitalPatientsPage from "../pages/hospital/patients";
 // Utils
 import { ROLE } from "../utils/constants";
 import HospitalDoctorsPage from "../pages/hospital/doctors";
+import EditPatient from "../pages/patients/edit";
 
 const WithFixedSidebar = () => {
   const [pageTitle, setPageTitle] = useState<string>("Overview");
@@ -40,10 +41,6 @@ const WithFixedSidebar = () => {
 
                   <Route path="/overview" element={<OverviewPage />} />
                   <Route path="/patients" element={<PatientsPage />} />
-                  <Route
-                    path="/patients/:id"
-                    element={<PatientDetailsPage />}
-                  />
                   <Route path="/reviews" element={<ReviewsPage />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="/appointments" element={<AppointmentsPage />} />
@@ -57,6 +54,14 @@ const WithFixedSidebar = () => {
                   <Route path="/doctors" element={<HospitalDoctorsPage />} />
                 </>
               )}
+              <Route
+                path="/patients/:id"
+                element={<PatientDetailsPage />}
+              />
+              <Route
+                path="/patients/:id/edit"
+                element={<EditPatient />}
+              />
               <Route path="/*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>

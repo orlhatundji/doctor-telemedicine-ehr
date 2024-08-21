@@ -21,8 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             borderColor: "#E0E0E0",
             color: "#111111",
             fontSize: 14,
-            height: 28,
-            padding: 0,
+            padding: 8,
           }),
         }}
         theme={(theme) => ({
