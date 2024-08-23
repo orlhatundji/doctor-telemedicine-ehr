@@ -22,6 +22,7 @@ export const getAge = (date: Date) => {
 }
 
 export const removeNull = (obj: any) => {
+  if(!obj) return;
   Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] === '') && delete obj[key]);
   return obj;
 }
@@ -40,10 +41,57 @@ export const keyToHeader = (key: string) => {
       return "Marital status";
     case "patientCount":
       return "Patient count";
+    case "familyConditions":
+      return "Common Family conditions";
+    case "pastMedicalConditions":
+      return "Past medical conditions";
+    case "allergies":
+      return "Allergies";
+    case "currentMedications":
+      return "Current medications";
+    case "alcoholConsumption":
+      return "Alcohol consumption";
+    case "genotype":
+      return "Genotype";
+    case "assignedDoctors":
+      return "Assigned doctors";
+    case "hospitalId":
+      return "Hospital ID";
+    case "userId":
+      return "User ID";
+    case "id":
+      return "ID";
     default:
       return key;
   }
 };
+
+export const createDefaultOption = (valueArray: string) => {
+  if (!valueArray) return [];
+  return valueArray.split(",").map((value: string) => ({
+    value,
+    label: value,
+  }));
+}
+
+export  const optionsToString = (options: Record<string, any>[]) => {
+  return options.map((option) => option.value).join(",");
+}
+
+export const cleanData = (data: any) => {
+  if (!data) return;
+  Object.keys(data).forEach((key) => {
+    if (Array.isArray(data[key])) {
+      data[key] = optionsToString(data[key]);
+    } else if (typeof data[key] === "object") {
+      console.log(data[key]);
+      data[key] = data[key].value;
+    } else if (data[key] === "" || data[key] === null || data[key] === undefined) {
+      delete data[key];
+    }
+  });
+  return data;
+}
 
 export const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);

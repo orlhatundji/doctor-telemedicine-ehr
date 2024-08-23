@@ -11,8 +11,9 @@ import { removeNull } from "../../../utils/helpers";
 
 // Components
 import Input from "../../../components/Input";
-import Dropdown from "../../../components/Dropdown";
 import { Button } from "../../../components/Button";
+import Multiselect from "../../../components/MultiSelect";
+import { ROLE } from "../../../utils/constants";
 
 const MedicalProfileForm = ({
   patient,
@@ -23,6 +24,7 @@ const MedicalProfileForm = ({
 }) => {
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isValid },
@@ -32,17 +34,9 @@ const MedicalProfileForm = ({
     defaultValues: {},
   });
   const navigate = useNavigate();
-  const [gender, setGender] = useState<{ value: string; label: string } | null>(
-    null
-  );
   const [loading, setLoading] = useState(false);
-  const [maritalStatus, setMaritalStatus] = useState<{
-    value: string;
-    label: string;
-  } | null>(null);
 
   useEffect(() => {
-    if (!patient || !id) return;
     const fetchUpdatedValues = async () => {
       const {
         name,
@@ -54,7 +48,7 @@ const MedicalProfileForm = ({
         emergencyContact,
         nextOfKin,
         nextOfKinRelationShip,
-      } = patient;
+      } = patient || {};
       reset({
         name,
         dateOfBirth: dayjs(dateOfBirth).format("MM/DD/YYYY"),
@@ -69,13 +63,6 @@ const MedicalProfileForm = ({
     };
     fetchUpdatedValues();
   }, [id, patient, reset]);
-
-  useEffect(() => {
-    reset({
-      maritalStatus: maritalStatus?.value,
-      gender: gender?.value,
-    });
-  }, [gender?.value, maritalStatus?.value, reset]);
 
   const onSubmit = (data: Record<string, any>) => {
     if (!id) return;
@@ -93,16 +80,16 @@ const MedicalProfileForm = ({
 
   return (
     <form
-      className="overflow-y-scroll pr-10 h-[90%] pb-10"
+      className="overflow-y-scroll pr-10 h-[90%] pb-10 pt-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex flex-col gap-y-4 mt-6">
+      <div className="flex flex-col gap-y-4">
         <div className="flex flex-col gap-y-2">
           <Input
             name="name"
             label="Name"
             placeholder="Enter name"
-            defaultValue={patient.name}
+            defaultValue={patient?.name}
             {...{ register, errors }}
           />
         </div>
@@ -122,42 +109,50 @@ const MedicalProfileForm = ({
             {...{ register, errors }}
           />
         </div>
-        <div className="flex flex-col gap-y-4 mt-6">
+        <div className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-2">
             <label className="leading-[1.2rem]">Gender</label>
-            <Dropdown
+            <Multiselect
+              control={control}
               options={[
                 { value: "MALE", label: "Male" },
                 { value: "FEMALE", label: "Female" },
               ]}
-              selected={gender}
-              setSelected={setGender}
+              name="genotype"
+              isMulti={false}
+              isValidNewOption={false}
+              defaultInputValue={patient?.gender}
             />
           </div>
         </div>
-        <div className="flex flex-col gap-y-4 mt-6">
+        <div className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-2">
             <label className="leading-[1.2rem]">Marital Status</label>
-            <Dropdown
+            <Multiselect
+              control={control}
               options={[
                 { value: "SINGLE", label: "Single" },
                 { value: "MARRIED", label: "Married" },
                 { value: "DIVORCED", label: "Divorce" },
                 { value: "WIDOWED", label: "Windowed" },
               ]}
-              selected={maritalStatus}
-              setSelected={setMaritalStatus}
+              name="maritalStatus"
+              isMulti={false}
+              isValidNewOption={false}
+              defaultInputValue={patient?.maritalStatus}
             />
           </div>
         </div>
-        <div className="flex flex-col gap-y-2">
-          <Input
-            name="occupation"
-            label="Occupation"
-            placeholder="Enter occupation"
-            {...{ register, errors }}
-          />
-        </div>
+        {patient?.role === ROLE.PATIENT && (
+          <div className="flex flex-col gap-y-2">
+            <Input
+              name="occupation"
+              label="Occupation"
+              placeholder="Enter occupation"
+              {...{ register, errors }}
+            />
+          </div>
+        )}
         <div className="flex flex-col gap-y-2">
           <Input
             name="emergencyContact"
@@ -190,9 +185,6 @@ const MedicalProfileForm = ({
         className={twMerge("mt-10 py-6", loading && "bg-black")}
         disabled={!isValid}
         type="submit"
-        // onClick={handleSubmit((data) => {
-        //   console.log(data);
-        // })}
       />
     </form>
   );

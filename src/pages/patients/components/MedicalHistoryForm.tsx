@@ -1,134 +1,119 @@
 // Components
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+// Utils
+import {
+  allergies,
+  familyConditions,
+  pastMedicalConditions,
+  currentMedications,
+  vaccinationHistory,
+  surgicalHistory,
+  socialHistory,
+} from "../../../utils/constants";
+import { axiosInstance } from "../../../utils/baseAxios";
+import { cleanData, createDefaultOption } from "../../../utils/helpers";
 
 // Components
 import Input from "../../../components/Input";
 import { Button } from "../../../components/Button";
-import Dropdown from "../../../components/Dropdown";
 import Multiselect from "../../../components/MultiSelect";
 
-const familyConditions = [
-  { value: "hypertension", label: "Hypertension" },
-  { value: "diabetes", label: "Diabetes" },
-  { value: "cancer", label: "Cancer" },
-  { value: "asthma", label: "Asthma" },
-  { value: "sickle_cell", label: "Sickle Cell" },
-];
-
-const allergies = [
-  { value: "lactose_intolerant", label: "Lactose Intolerant" },
-  { value: "peanuts", label: "Peanuts" },
-  { value: "dust", label: "Dust" },
-  { value: "mold", label: "Mold" },
-  { value: "pet_dander", label: "Pet Dander" },
-];
-
-const previous_illness = [
-  { value: "malarial", label: "Malaria" },
-  { value: "typhoid", label: "Typhoid" },
-  { value: "tuberculosis", label: "Tuberculosis" },
-  { value: "hepatitis", label: "Hepatitis" },
-  { value: "surgery", label: "Surgery" },
-];
-
-const current_medications = [
-  { value: "paracetamol", label: "Paracetamol" },
-  { value: "amoxicillin", label: "Amoxicillin" },
-  { value: "ibuprofen", label: "Ibuprofen" },
-  { value: "aspirin", label: "Aspirin" },
-  { value: "tramadol", label: "Tramadol" },
-];
-
-const vaccination_history = [
-  { value: "yellow_fever", label: "Yellow Fever" },
-  { value: "hepatitis_b", label: "Hepatitis B" },
-  { value: "polio", label: "Polio" },
-  { value: "tetanus", label: "Tetanus" },
-];
-
-const surgical_history = [
-  { value: "appendectomy", label: "Appendectomy" },
-  { value: "hernia_repair", label: "Hernia repair" },
-  { value: "cesarean_section", label: "Cesarean section" },
-];
-
-const social_history = [
-  { value: "smoking", label: "Smoking" },
-  { value: "alcohol", label: "Alcohol" },
-  { value: "drug_abuse", label: "Drug abuse" },
-];
-
-const obstetric_history = [
-  { value: "gravida", label: "Gravida" },
-  { value: "para", label: "Para" },
-  { value: "abortions", label: "Abortions" },
-  { value: "living_children", label: "Living children" },
-];
-
-const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
+const MedicalHistoryForm = ({
+  patient: user = {},
+  id,
+}: {
+  id: string | undefined;
+  patient: Record<string, any>;
+}) => {
   const {
     register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
+    defaultValues: {
+      weight: user.patient?.weight,
+      height: user.patient?.height,
+    },
   });
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const [hasAllergy, setHasAllergy] = useState<{
-    value: string;
-    label: string;
-  } | null>(null);
+  const onSubmit = async (data: Record<string, any>) => {
+    if (!data && !user.patient) return;
+    setLoading(true);
+    data = cleanData(data);
+    await axiosInstance
+      .patch(`/patient/${user.patient.id}`, data)
+      .then((res) => {
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    setLoading(false);
+  };
 
   return (
-    <div className="overflow-y-scroll pr-10 h-full pb-10 pt-4">
+    <form
+      className="overflow-y-scroll pr-10 h-full pb-10 pt-4"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Common family conditions</label>
-          <Multiselect options={allergies} name="allergies" />
-        </div>
-      </div>
-      <div className="flex flex-col gap-y-4 mt-6">
-        <div className="flex flex-col gap-y-2">
-          <label className="leading-[1.2rem]">Allergies</label>
-          <Dropdown
-            options={[
-              { value: "yes", label: "Yes" },
-              { value: "no", label: "No" },
-            ]}
-            selected={hasAllergy}
-            setSelected={setHasAllergy}
+          <Multiselect
+            control={control}
+            options={familyConditions}
+            name="familyConditions"
+            defaultValue={createDefaultOption(user?.patient?.familyConditions)}
           />
         </div>
       </div>
-      {hasAllergy && hasAllergy.value === "yes" && (
-        <div className="flex flex-col gap-y-4 mt-6 ml-10">
-          <div className="flex flex-col gap-y-2">
-            <label className="leading-[1.2rem]">List of Allergies</label>
-            <Multiselect options={familyConditions} name="fcond" />
-          </div>
+
+      <div className="flex flex-col gap-y-4 mt-6">
+        <div className="flex flex-col gap-y-2">
+          <label className="leading-[1.2rem]">Allergies</label>
+          <Multiselect
+            control={control}
+            options={allergies}
+            name="allergies"
+            defaultValue={createDefaultOption(user?.patient?.allergies)}
+          />
         </div>
-      )}
+      </div>
+
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Past medical conditions</label>
-          <Multiselect options={previous_illness} name="allergies" />
+          <Multiselect
+            control={control}
+            options={pastMedicalConditions}
+            name="pastMedicalConditions"
+            defaultValue={createDefaultOption(user?.patient?.pastMedicalConditions)}
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Alcohol consumption</label>
-          <Dropdown
+          <Multiselect
+            control={control}
             options={[
               { value: "daily", label: "Daily" },
               { value: "casually", label: "Casually" },
               { value: "weekly", label: "Weekly" },
               { value: "never", label: "Never" },
             ]}
-            selected={hasAllergy}
-            setSelected={setHasAllergy}
+            name="alcoholConsumption"
+            isMulti={false}
+            defaultInputValue={user?.patient?.alcoholConsumption}
           />
         </div>
       </div>
@@ -136,35 +121,56 @@ const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Current medications</label>
-          <Multiselect options={current_medications} name="allergies" />
+          <Multiselect
+            control={control}
+            options={currentMedications}
+            name="currentMedications"
+            defaultValue={createDefaultOption(user?.patient?.currentMedications)}
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Vaccination history</label>
-          <Multiselect options={vaccination_history} name="allergies" />
+          <Multiselect
+            control={control}
+            options={vaccinationHistory}
+            name="vaccinationHistory"
+            defaultValue={createDefaultOption(user?.patient?.vaccinationHistory)}
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Surgical history</label>
-          <Multiselect options={surgical_history} name="allergies" />
+          <Multiselect
+            control={control}
+            options={surgicalHistory}
+            name="surgicalHistory"
+            defaultValue={createDefaultOption(user?.patient?.surgicalHistory)}
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Social history</label>
-          <Multiselect options={social_history} name="allergies" />
+          <Multiselect
+            control={control}
+            options={socialHistory}
+            name="socialHistory"
+            defaultValue={createDefaultOption(user?.patient?.socialHistory)}
+          />
         </div>
       </div>
 
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Blood group</label>
-          <Dropdown
+          <Multiselect
+            control={control}
             options={[
               { value: "o+", label: "O+" },
               { value: "o-", label: "O-" },
@@ -175,15 +181,18 @@ const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
               { value: "ab+", label: "AB+" },
               { value: "ab-", label: "AB-" },
             ]}
-            selected={hasAllergy}
-            setSelected={setHasAllergy}
+            name="bloodGroup"
+            isMulti={false}
+            isValidNewOption={false}
+            defaultInputValue={user?.patient?.bloodGroup}
           />
         </div>
       </div>
       <div className="flex flex-col gap-y-4 mt-6">
         <div className="flex flex-col gap-y-2">
           <label className="leading-[1.2rem]">Genotype</label>
-          <Dropdown
+          <Multiselect
+            control={control}
             options={[
               { value: "aa", label: "AA" },
               { value: "as", label: "AS" },
@@ -192,8 +201,10 @@ const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
               { value: "sc", label: "SC" },
               { value: "cc", label: "CC" },
             ]}
-            selected={hasAllergy}
-            setSelected={setHasAllergy}
+            name="genotype"
+            isMulti={false}
+            isValidNewOption={false}
+            defaultInputValue={user?.patient?.genotype}
           />
         </div>
       </div>
@@ -213,7 +224,7 @@ const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
           <Input
             name="height"
             type="number"
-            label="Current height (kg)"
+            label="Current height (cm)"
             placeholder="Enter height"
             {...{ register, errors }}
           />
@@ -221,14 +232,11 @@ const MedicalHistoryForm = ({ patient }: { patient: Record<string, any> }) => {
       </div>
       <Button
         title="Save"
-        color="primary"
+        loading={loading}
         className="mt-10 py-6"
-        disabled={!isValid}
-        onClick={handleSubmit((data) => {
-          console.log(data);
-        })}
+        type="submit"
       />
-    </div>
+    </form>
   );
 };
 

@@ -109,7 +109,7 @@ const HospitalPatientsPage: React.FC = () => {
                   <div className="p-2 bg-secondary-300 rounded flex items-center justify-center">
                     <EditIcon
                       className="cursor-pointer"
-                      onClick={() => navigate(`${patient.id}/edit`)}
+                      onClick={() => navigate(`${patient.id}/edit`, { state: { patient } })}
                     />
                   </div>
                 </td>

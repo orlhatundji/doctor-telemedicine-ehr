@@ -104,7 +104,10 @@ const HospitalDoctorsPage: React.FC = () => {
               </td>
               <td className="border px-4 py-4 text-center">
                 <div className="p-2 bg-slate-100 rounded flex items-center justify-center">
-                  <EditIcon className="cursor-pointer" />
+                  <EditIcon className="cursor-pointer"
+                    onClick={() => navigate(`${doctor.id}/edit`, { state: { doctor } })}
+
+                  />
                 </div>
               </td>
               <td className="border px-4 py-4 text-center relative">

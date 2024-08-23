@@ -6,7 +6,7 @@ import { ReactComponent as MaskIcon } from "../assets/icons/mask.svg";
 
 interface InputProps {
   name: string;
-  type?: "password" | "text" | "number" | "email" | "tel" | "url" | "file";
+  type?: "password" | "text" | "number" | "email" | "tel" | "url" | "file" | "date" | "time" | "datetime-local" | "month" | "week" | "search" | "color";
   defaultValue?: any;
   value?: any;
   placeholder?: string;
@@ -57,7 +57,8 @@ const Input: React.FC<InputProps> = ({
       )}
       <div className="relative flex items-center">
         <input
-          type={showPassword ? "text" : "password"}
+          // type={showPassword ? "text" : "password"}
+          type={type ? type : showPassword ? "text" : "password"}
           disabled={disabled}
           defaultValue={defaultValue}
           value={value}

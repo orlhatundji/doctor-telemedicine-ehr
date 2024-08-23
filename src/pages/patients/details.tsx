@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 // Utils
@@ -13,14 +13,28 @@ import MedicalCard from "../../components/MedicalCard";
 import TreatmentPlan from "./components/TreatmentPlan";
 import PersonalProfile from "../../components/PersonalProfile";
 import LaboratoryTests from "./components/LaboratoryTests";
+import { axiosInstance } from "../../utils/baseAxios";
 
 const PatientDetails = () => {
   const navigate = useNavigate();
   const patient = useLocation().state;
- 
   const [step, setStep] = useState(0);
   const [showAddTreatment, setShowAddTreatment] = useState(false);
   const role = localStorage.getItem("role");
+  const params = useParams();
+  const id = params.id;
+  const [userDetails, setUserDetails] = useState({ patient: {}});
+
+  useEffect(() => {
+    axiosInstance
+      .get(`/${patient ? "patient" : "doctor"}/unique?id=${id}`)
+      .then((res) => {
+        setUserDetails(res.data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }, [id, patient]);
 
   return (
     <div>
@@ -36,12 +50,12 @@ const PatientDetails = () => {
         </div>
         {role === ROLE.HOSPITAL && (
           <Button title="Edit" className="absolute right-0 w-fit px-8 py-2"
-          onClick={() => navigate("edit", { state: patient })}
+          onClick={() => navigate("edit", { state: { patient, userDetails } })}
           />
         )}
       </div>
       <div
-        className={twMerge("mt-4", role === ROLE.DOCTOR && "grid-cols-2")}
+        className={twMerge("mt-4", role === ROLE.DOCTOR && "grid grid-cols-2")}
       >
         <div
           className={twMerge(
@@ -57,7 +71,7 @@ const PatientDetails = () => {
             {...{ step, setStep }}
           />
 
-          {step === 0 && <MedicalCard />}
+          {step === 0 && userDetails?.patient && <MedicalCard userDetails={userDetails} />}
           {step === 1 && <PersonalProfile user={patient} />}
         </div>
         {role === ROLE.DOCTOR && (

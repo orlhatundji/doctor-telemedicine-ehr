@@ -54,12 +54,12 @@ const WithFixedSidebar = () => {
                   <Route path="/patients" element={<HospitalPatientsPage />} />
                   <Route path="/doctors" element={<HospitalDoctorsPage />} />
                   <Route path="/doctors/:id" element={<DoctorDetailsPage />} />
+                  <Route path="*" element={<Navigate to={"/patients"} replace />} />
                 </>
               )}
               <Route path="/patients/:id" element={<PatientDetailsPage />} />
               <Route path="/patients/:id/edit" element={<EditPatient />} />
               <Route path="/doctors/:id/edit" element={<EditPatient />} />
-              <Route path="/*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
         </div>

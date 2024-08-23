@@ -1,32 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
-// Utils
-import { axiosInstance } from "../../utils/baseAxios";
 
 // Components
 import { Button } from "../../components/Button";
 import BackButton from "../../components/BackArrow";
 import MedicalHistoryForm from "./components/MedicalHistoryForm";
 import MedicalProfileForm from "./components/MedicalProfileForm";
+import MedicalProfessionalForm from "./components/MedicalProfessionalForm";
 
 const EditUser = () => {
   const navigate = useNavigate();
-  const [editMode, setEditMode] = useState<"profile" | "history">("profile");
-  const [userDetails, setUserDetails] = useState({});
+  const { patient, doctor, userDetails } = useLocation().state || {};
+  const [editMode, setEditMode] = useState<
+    "profile" | "history" | "professional"
+  >("profile");
   const params = useParams();
-  const { patient } = useLocation().state;
   const id = params.id;
-  useEffect(() => {
-    axiosInstance
-      .get(`/${patient ? "patient" : "doctor"}/unique?id=${id}`)
-      .then((res) => {
-        setUserDetails(res.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  }, [id, patient]);
+
   return (
     <div className="h-[80vh]">
       <div className="flex items-center relative">
@@ -46,7 +36,7 @@ const EditUser = () => {
         <div className="flex justify-between mt-8 pr-14">
           <Button
             title="Profile"
-            color={editMode === "profile" ? "primary" : "secondary"}
+            color={editMode !== "profile" ? "secondary" : "primary"}
             className="w-fit px-8"
             onClick={() => setEditMode("profile")}
           />
@@ -59,12 +49,23 @@ const EditUser = () => {
               onClick={() => setEditMode("history")}
             />
           )}
+          {doctor && (
+            <Button
+              title="Professional Record"
+              color={editMode === "professional" ? "primary" : "secondary"}
+              className="w-fit px-8"
+              onClick={() => setEditMode("professional")}
+            />
+          )}
         </div>
         {editMode === "history" && (
           <MedicalHistoryForm patient={userDetails} {...{ id }} />
         )}
         {editMode === "profile" && (
           <MedicalProfileForm patient={userDetails} {...{ id }} />
+        )}
+        {editMode === "professional" && (
+          <MedicalProfessionalForm doctor={userDetails} {...{ id }} />
         )}
       </div>
     </div>
