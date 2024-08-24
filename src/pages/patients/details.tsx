@@ -14,16 +14,18 @@ import TreatmentPlan from "./components/TreatmentPlan";
 import PersonalProfile from "../../components/PersonalProfile";
 import LaboratoryTests from "./components/LaboratoryTests";
 import { axiosInstance } from "../../utils/baseAxios";
+import AssignDoctor from "../hospital/patients/components/AssignDoctor";
 
 const PatientDetails = () => {
   const navigate = useNavigate();
   const patient = useLocation().state;
   const [step, setStep] = useState(0);
+  const [showAssignDoctor, setShowAssignDoctor] = useState(false);
   const [showAddTreatment, setShowAddTreatment] = useState(false);
   const role = localStorage.getItem("role");
   const params = useParams();
   const id = params.id;
-  const [userDetails, setUserDetails] = useState({ patient: {}});
+  const [userDetails, setUserDetails] = useState({ patient: {} });
 
   useEffect(() => {
     axiosInstance
@@ -49,9 +51,25 @@ const PatientDetails = () => {
           /<span className="">Patient details</span>
         </div>
         {role === ROLE.HOSPITAL && (
-          <Button title="Edit" className="absolute right-0 w-fit px-8 py-2"
-          onClick={() => navigate("edit", { state: { patient, userDetails } })}
-          />
+          <div className="absolute right-0 flex gap-x-10">
+            <Button
+              title="Assign a Doctor"
+              className="w-fit px-8 py-2"
+              color="secondary"
+              onClick={() =>
+                setShowAssignDoctor((prev) => {
+                  return !prev;
+                })
+              }
+            />
+            <Button
+              title="Edit"
+              className="w-fit px-8 py-2"
+              onClick={() =>
+                navigate("edit", { state: { patient, userDetails } })
+              }
+            />
+          </div>
         )}
       </div>
       <div
@@ -71,7 +89,9 @@ const PatientDetails = () => {
             {...{ step, setStep }}
           />
 
-          {step === 0 && userDetails?.patient && <MedicalCard userDetails={userDetails} />}
+          {step === 0 && userDetails?.patient && (
+            <MedicalCard userDetails={userDetails} />
+          )}
           {step === 1 && <PersonalProfile user={patient} />}
         </div>
         {role === ROLE.DOCTOR && (
@@ -84,6 +104,7 @@ const PatientDetails = () => {
           </div>
         )}
       </div>
+      <AssignDoctor show={showAssignDoctor} setShow={setShowAssignDoctor} id={patient.patientId} />
     </div>
   );
 };

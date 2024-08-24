@@ -32,6 +32,7 @@ const HospitalPatientsPage: React.FC = () => {
         let patients = res.data.map((patient: any) => {
           const user = patient.user;
           return {
+            patientId: patient.id,
             id: user.id,
             name: user.name,
             age: getAge(user.dateOfBirth),
