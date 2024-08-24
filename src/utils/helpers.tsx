@@ -7,7 +7,7 @@ export const add30Minutes = (date: Date) => {
     d.setMinutes(0);
   }
   return d;
-}
+};
 
 export const getAge = (date: Date) => {
   if (!date) return 0;
@@ -19,13 +19,15 @@ export const getAge = (date: Date) => {
     age--;
   }
   return age;
-}
+};
 
 export const removeNull = (obj: any) => {
-  if(!obj) return;
-  Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] === '') && delete obj[key]);
+  if (!obj) return;
+  Object.keys(obj).forEach(
+    (key) => (obj[key] == null || obj[key] === "") && delete obj[key]
+  );
   return obj;
-}
+};
 
 export const keyToHeader = (key: string) => {
   switch (key) {
@@ -72,32 +74,35 @@ export const createDefaultOption = (valueArray: string) => {
     value,
     label: value,
   }));
-}
+};
 
-export  const optionsToString = (options: Record<string, any>[]) => {
+export const optionsToString = (options: Record<string, any>[]) => {
   return options.map((option) => option.value).join(",");
-}
+};
 
 export const cleanData = (data: any) => {
   if (!data) return;
   Object.keys(data).forEach((key) => {
     if (Array.isArray(data[key])) {
       data[key] = optionsToString(data[key]);
-    } else if (typeof data[key] === "object") {
-      console.log(data[key]);
-      data[key] = data[key].value;
-    } else if (data[key] === "" || data[key] === null || data[key] === undefined) {
+    } else if (
+      data[key] === "" ||
+      data[key] === null ||
+      data[key] === undefined
+    ) {
       delete data[key];
+    } else if (data[key].value) {
+      data[key] = data[key].value;
     }
   });
   return data;
-}
+};
 
 export const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };
 
-export const getClassNames = (...classes: (string|undefined)[]) => {
+export const getClassNames = (...classes: (string | undefined)[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
@@ -122,8 +127,8 @@ export const URLPattern =
 export const getLocalStorageData = (storageName: string) => {
   const data = localStorage.getItem(storageName);
   return data ? JSON.parse(data) : null;
-}
+};
 
-export const setLocalStorageData = (storageName: string,data: string) => {
+export const setLocalStorageData = (storageName: string, data: string) => {
   localStorage.setItem(storageName, data);
-}
+};

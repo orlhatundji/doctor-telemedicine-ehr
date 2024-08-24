@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 
 // Utils
 import { axiosInstance } from "../../../utils/baseAxios";
-import { removeNull } from "../../../utils/helpers";
+import { cleanData } from "../../../utils/helpers";
 
 // Components
 import Input from "../../../components/Input";
@@ -67,8 +67,9 @@ const MedicalProfileForm = ({
   const onSubmit = (data: Record<string, any>) => {
     if (!id) return;
     setLoading(true);
+    data = cleanData(data);
     axiosInstance
-      .patch(`/users/${id}`, removeNull(data))
+      .patch(`/users/${id}`, data)
       .then((res) => {
         navigate(-1);
       })
@@ -118,7 +119,7 @@ const MedicalProfileForm = ({
                 { value: "MALE", label: "Male" },
                 { value: "FEMALE", label: "Female" },
               ]}
-              name="genotype"
+              name="gender"
               isMulti={false}
               isValidNewOption={false}
               defaultInputValue={patient?.gender}
