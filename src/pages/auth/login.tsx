@@ -14,7 +14,7 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ setStep }) => {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [loginType, setLoginType] = React.useState("doctor");
+  const [loginType, setLoginType] = React.useState<'DOCTOR' | 'HOSPITAL'>("DOCTOR");
   const { login } = useAuth();
   const { register, handleSubmit } = useForm({
     mode: "onChange",
@@ -45,11 +45,15 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
     setError("");
     setLoading(true);
     await axiosInstance
-      .post(loginType === "doctor" ? "/auth/login" : "/auth/hospital/login", {
+      .post(loginType === "DOCTOR" ? "/auth/login" : "/auth/hospital/login", {
         email: data.email,
         password: data.password,
       })
       .then((res) => {
+        if(res.data.role !== loginType) {
+          setError("Invalid login type");
+          return;
+        }
         login(
           res.data.access_token,
           res.data.email,
@@ -93,12 +97,12 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
       <div className="flex items-center gap-10 py-5 justify-between">
         <div
           className="flex items-center cursor-pointer"
-          onClick={() => setLoginType("doctor")}
+          onClick={() => setLoginType("DOCTOR")}
         >
           <input
             type="radio"
             value={loginType}
-            checked={loginType === "doctor"}
+            checked={loginType === "DOCTOR"}
             defaultChecked
             name="doctor"
             id="doctor"
@@ -110,12 +114,12 @@ const Login: React.FC<LoginProps> = ({ setStep }) => {
         <hr className="w-full shadow" />
         <div
           className="flex items-center cursor-pointer"
-          onClick={() => setLoginType("hospital")}
+          onClick={() => setLoginType("HOSPITAL")}
         >
           <input
             type="radio"
             value={loginType}
-            checked={loginType === "hospital"}
+            checked={loginType === "HOSPITAL"}
             name="hospital"
             id="hospital"
             className="mr-2"

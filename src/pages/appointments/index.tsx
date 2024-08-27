@@ -95,7 +95,7 @@ const AppointmentsPage: React.FC = () => {
                             : "text-tertiary-100"
                         )}
                       >
-                        {event.person.name}
+                        {event.person?.user?.name}
                       </span>
                       {(currentView === "day" || currentView === "month") && (
                         <img

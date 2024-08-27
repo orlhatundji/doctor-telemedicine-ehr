@@ -1,51 +1,13 @@
 import React, { useEffect } from "react";
+import dayjs from "dayjs";
 
 // Assets
 import { ReactComponent as NoteIcon } from "../../../assets/icons/note.svg";
 import person from "../../../assets/images/person.svg";
 import { axiosInstance } from "../../../utils/baseAxios";
 import { add30Minutes } from "../../../utils/helpers";
-import dayjs from "dayjs";
 
 const Appointments = () => {
-  // const appointments = [
-  //   {
-  //     id: 1,
-  //     date: "2021-01-01",
-  //     time: "10:00",
-  //     patient: {
-  //       id: 1,
-  //       name: "John Doe",
-  //     },
-  //   },
-  //   {
-  //     id: 2,
-  //     date: "2021-01-01",
-  //     time: "11:00",
-  //     patient: {
-  //       id: 2,
-  //       name: "Jane Doe",
-  //     },
-  //   },
-  //   {
-  //     id: 3,
-  //     date: "2021-01-01",
-  //     time: "12:00",
-  //     patient: {
-  //       id: 3,
-  //       name: "Alice Doe",
-  //     },
-  //   },
-  //   {
-  //     id: 4,
-  //     date: "2021-01-01",
-  //     time: "12:00",
-  //     patient: {
-  //       id: 4,
-  //       name: "Alice Doe",
-  //     },
-  //   },
-  // ];
 
   const [appointments, setAppointments] = React.useState([]);
 
@@ -86,7 +48,7 @@ const Appointments = () => {
               <img src={person} alt="" className="w-8 h-8 rounded-full" />
               <div className="">
                 <h2 className="font-bold text-sm leading-[.8rem]">
-                  {appointment.person?.name}
+                  {appointment.person?.user?.name}
                 </h2>
                 <span className="text-xs text-grey-100">30 years</span>
               </div>
