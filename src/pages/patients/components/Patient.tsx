@@ -14,6 +14,7 @@ type PatientProps = {
   showViewMore?: boolean;
   className?: string;
   size?: "sm" | "md";
+  patient?: any;
 };
 
 const Patient: React.FC<PatientProps> = ({
@@ -24,8 +25,10 @@ const Patient: React.FC<PatientProps> = ({
   showViewMore,
   className = "border rounded-lg",
   size = "sm",
+  patient,
 }) => {
   const navigate = useNavigate();
+  console.log('----patient', patient)
   return (
     <div className={twMerge("py-6 px-4", className)}>
       <div className="flex items-center justify-between">
@@ -49,29 +52,17 @@ const Patient: React.FC<PatientProps> = ({
             >
               {name}
             </h2>
-            <span className="text-xs text-grey-100">
-              {age} years | visits
-            </span>
+            <span className="text-xs text-grey-100">{age} years | visits</span>
           </div>
         </div>
         {showViewMore && (
           <Button
             title="View More"
             className="w-fit py-2 px-3 text-[.625rem]"
-            onClick={() => navigate("1")}
+            onClick={() => navigate(`${patient.id}`, { state: patient })}
           />
         )}
       </div>
-      {/* <div className="flex items-center gap-x-8 mt-8">
-        <div className="flex flex-col gap-y-0">
-          <span className="font-bold text-sm ">Upcoming Visit</span>
-          <span className="text-sm text-grey-100">{upComingVisit}</span>
-        </div>
-        <div className="flex flex-col gap-y-0">
-          <span className="font-bold text-sm ">Recent Visit</span>
-          <span className="text-sm text-grey-100">{recentVisit}</span>
-        </div>
-      </div> */}
       <div className="flex items-center gap-x-8 mt-6">
         <div className="flex flex-col gap-y-0">
           <span className="font-bold text-sm ">Email</span>

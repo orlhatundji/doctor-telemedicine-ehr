@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Patient from "./components/Patient";
 import SearchInput from "../../components/SearchInput";
 import { axiosInstance } from "../../utils/baseAxios";
+import { getAge } from "../../utils/helpers";
 
 const PatientsPage: React.FC = () => {
 
@@ -19,14 +20,11 @@ const PatientsPage: React.FC = () => {
     axiosInstance.get("/patient").then((res) => {
       let patients = res.data.map((patient: any) => {
         return {
-          id: patient.id,
-          name: patient.name,
-          age: patient.age || 30,
+          id: patient.user.id,
+          name: patient.user?.name,
+          age: getAge(patient.user?.dateOfBirth),
           email: patient.user?.email,
-          phone: patient.phone,
-          noOfVisits: patient.noOfVisits,
-          recentVisit: patient.recentVisit,
-          upComingVisit: patient.upComingVisit,
+          phone: patient.user?.phone,
         };
       });
       setPatients(patients);
@@ -50,6 +48,7 @@ const PatientsPage: React.FC = () => {
           <Patient
             key={patient.id}
             {...patient}
+            patient={patient}
             showViewMore
             className="border rounded-lg min-w-[328px]"
           />

@@ -1,30 +1,30 @@
+import { twMerge } from "tailwind-merge";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
 
 // Utils
 import { ROLE } from "../../utils/constants";
+import { axiosInstance } from "../../utils/baseAxios";
 
 // Components
-import { Button } from "../../components/Button";
 import Patient from "./components/Patient";
+import { Button } from "../../components/Button";
 import { ProgressB } from "../../components/Progress";
-import MedicalCard from "../../components/MedicalCard";
 import TreatmentPlan from "./components/TreatmentPlan";
-import PersonalProfile from "../../components/PersonalProfile";
+import MedicalCard from "../../components/MedicalCard";
 import LaboratoryTests from "./components/LaboratoryTests";
-import { axiosInstance } from "../../utils/baseAxios";
+import PersonalProfile from "../../components/PersonalProfile";
 import AssignDoctor from "../hospital/patients/components/AssignDoctor";
 
 const PatientDetails = () => {
-  const navigate = useNavigate();
-  const patient = useLocation().state;
-  const [step, setStep] = useState(0);
-  const [showAssignDoctor, setShowAssignDoctor] = useState(false);
-  const [showAddTreatment, setShowAddTreatment] = useState(false);
-  const role = localStorage.getItem("role");
   const params = useParams();
   const id = params.id;
+  const navigate = useNavigate();
+  const [step, setStep] = useState(0);
+  const patient = useLocation().state;
+  const role = localStorage.getItem("role");
+  const [showAssignDoctor, setShowAssignDoctor] = useState(false);
+  const [showAddTreatment, setShowAddTreatment] = useState(false);
   const [userDetails, setUserDetails] = useState({ patient: {} });
 
   useEffect(() => {
@@ -73,12 +73,14 @@ const PatientDetails = () => {
         )}
       </div>
       <div
-        className={twMerge("mt-4", role === ROLE.DOCTOR && "grid grid-cols-2")}
+        className={twMerge(
+          "mt-4",
+          role === ROLE.DOCTOR && "grid grid-cols-[1fr,400px] gap-x-5"
+        )}
       >
         <div
           className={twMerge(
             "border rounded-lg",
-            role === ROLE.DOCTOR && "max-w-[472px]"
           )}
         >
           <Patient {...patient} className="" size="md" />
@@ -104,7 +106,11 @@ const PatientDetails = () => {
           </div>
         )}
       </div>
-      <AssignDoctor show={showAssignDoctor} setShow={setShowAssignDoctor} id={patient.patientId} />
+      <AssignDoctor
+        show={showAssignDoctor}
+        setShow={setShowAssignDoctor}
+        id={patient?.patientId}
+      />
     </div>
   );
 };
