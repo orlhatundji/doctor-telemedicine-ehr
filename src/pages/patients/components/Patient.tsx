@@ -28,7 +28,6 @@ const Patient: React.FC<PatientProps> = ({
   patient,
 }) => {
   const navigate = useNavigate();
-  console.log('----patient', patient)
   return (
     <div className={twMerge("py-6 px-4", className)}>
       <div className="flex items-center justify-between">

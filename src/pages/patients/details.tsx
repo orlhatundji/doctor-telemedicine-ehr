@@ -24,8 +24,7 @@ const PatientDetails = () => {
   const patient = useLocation().state;
   const role = localStorage.getItem("role");
   const [showAssignDoctor, setShowAssignDoctor] = useState(false);
-  const [showAddTreatment, setShowAddTreatment] = useState(false);
-  const [userDetails, setUserDetails] = useState({ patient: {} });
+  const [userDetails, setUserDetails] = useState<any>();
 
   useEffect(() => {
     axiosInstance
@@ -33,9 +32,7 @@ const PatientDetails = () => {
       .then((res) => {
         setUserDetails(res.data);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) => {});
   }, [id, patient]);
 
   return (
@@ -91,16 +88,16 @@ const PatientDetails = () => {
             {...{ step, setStep }}
           />
 
-          {step === 0 && userDetails?.patient && (
+          {step === 0 && userDetails && userDetails?.patient && (
             <MedicalCard userDetails={userDetails} />
           )}
           {step === 1 && <PersonalProfile user={patient} />}
         </div>
-        {role === ROLE.DOCTOR && (
+        {role === ROLE.DOCTOR && id && userDetails && (
           <div className="flex flex-col gap-y-6">
             <TreatmentPlan
-              showAddTreatment={showAddTreatment}
-              setShowAddTreatment={setShowAddTreatment}
+              userId={id}
+              patientId={userDetails.patient.id}
             />
             <LaboratoryTests />
           </div>

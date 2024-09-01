@@ -21,9 +21,7 @@ const DoctorDetailsPage = () => {
       .then((res) => {
         setUserDetails(res.data);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) => {});
   }, [id, doctor]);
 
   return (

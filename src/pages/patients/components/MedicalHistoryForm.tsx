@@ -53,9 +53,7 @@ const MedicalHistoryForm = ({
       .then((res) => {
         navigate(-1);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) => {});
     setLoading(false);
   };
 

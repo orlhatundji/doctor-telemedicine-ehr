@@ -23,9 +23,7 @@ const Setting = () => {
         delete res.data.doctor;
         setUserDetails(res.data);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) => {});
   }, [id]);
   return (
     <div className="h-full overflow-hidden">

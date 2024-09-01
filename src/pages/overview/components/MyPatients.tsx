@@ -1,8 +1,3 @@
-import React from "react";
-
-// Components
-import { Button } from "../../../components/Button";
-
 // Assets
 import { ReactComponent as PersonIcon } from "../../../assets/images/person.svg";
 import { ReactComponent as PatientsOutlineIcon } from "../../../assets/icons/patients_outline.svg";
@@ -24,7 +19,6 @@ const MyPatients = () => {
             +3
           </div>
         </div>
-        <Button title="Add patient" className="w-fit px-4" />
       </div>
 
       <div className="grid grid-cols-3 gap-x-4">

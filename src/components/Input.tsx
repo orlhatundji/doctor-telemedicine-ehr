@@ -14,6 +14,7 @@ interface InputProps {
   register?: any;
   rules?: any;
   errors?: any;
+  errorMessage?: string;
   disabled?: boolean;
   className?: string;
   labelStyle?: string;
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = ({
   disabled,
   className,
   labelStyle,
+  errorMessage,
   ...props
 }) => {
   const [showPassword, setSetShowPassword] = useState(type === "password" ? false : true)
@@ -70,8 +72,8 @@ const Input: React.FC<InputProps> = ({
         {type === "password" && <MaskIcon className="absolute right-4 cursor-pointer" onClick={() => setSetShowPassword((prev) => !prev)} />}
       </div>
       {errors && errors[name] && (
-        <span className="text-red-alert text-sm">
-          * {errors[name]?.message}
+        <span className="text-red-alert text-">
+          * {errorMessage}
         </span>
       )}
     </div>
@@ -88,6 +90,7 @@ export const TextArea: React.FC<InputProps> = ({
   register,
   rules,
   errors,
+  errorMessage,
   disabled,
   className,
   labelStyle = "",
@@ -121,7 +124,7 @@ export const TextArea: React.FC<InputProps> = ({
       />
       {errors && errors[name] && (
         <span className="text-red-alert text-sm">
-          * {errors[name]?.message}
+          * {errorMessage}
         </span>
       )}
     </div>

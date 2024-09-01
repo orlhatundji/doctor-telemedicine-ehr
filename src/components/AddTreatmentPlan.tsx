@@ -5,94 +5,105 @@ import { useForm } from "react-hook-form";
 import { Button } from "./Button";
 import Modal from "./Modal";
 import Input from "./Input";
+import { axiosInstance } from "../utils/baseAxios";
 
 type AddTreatmentPlanProps = {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
-  handleAddMedication: (medication: {
-    name: string;
-    dosage: string;
-    frequency: string;
-  }) => void;
+  patientId: string;
 };
 
-const AddTreatmentPlan: React.FC<AddTreatmentPlanProps> = ({
+const AddMedication: React.FC<AddTreatmentPlanProps> = ({
   show,
   setShow,
-  handleAddMedication,
+  patientId,
 }) => {
+  const [loading, setLoading] = React.useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      name: "Chloroquine Acetone 1000g",
-      dosage: "1",
-      frequency: "once daily",
+      title: "",
+      startDate: "",
+      endDate: "",
+      patientId: patientId,
     },
   });
-  const onSubmit = (data: {
-    name: string;
-    dosage: string;
-    frequency: string;
+  const onSubmit = async (data: {
+    title: string;
+    startDate: string;
+    endDate: string;
+    patientId?: number | string;
   }) => {
-    handleAddMedication(data);
-    setShow(false);
+    if(!patientId) return;
+    try {
+      setLoading(true);
+      data.patientId = +patientId;
+      data.endDate = new Date(data.endDate).toISOString();
+      data.startDate = new Date(data.startDate).toISOString();
+      await axiosInstance.post(`/treatmentplan`, data)
+      setShow(false);
+    } catch (error) {
+      console.log("error", error);
+    }
+    setLoading(false)
   };
   return (
     <Modal {...{ show, setShow }} title="Add treatment plan">
       <form className="min-w-[523px] z-[100]" onSubmit={handleSubmit(onSubmit)}>
         <Input
-          label="Medication"
-          placeholder="Name of medication"
-          name="name"
-          defaultValue={"Chloroquine Acetone 1000g"}
+          label="Plan Name"
+          placeholder="What's the name of the plan?"
+          name="title"
+          errorMessage="Plan name is required"
           {...{ register, errors }}
           rules={{
             required: true,
             maxLength: {
               value: 30,
-              message: "Medication name is too long",
+              message: "Plan name is too long",
             },
           }}
         />
         <div className="flex gap-4 mt-4">
           <Input
-            label="Dosage"
-            placeholder="How many tablets/litres"
-            name="dosage"
-            defaultValue={"1"}
+            label="Start Date"
+            placeholder="When should the plan start?"
+            name="startDate"
+            type="date"
              {...{ register, errors }}
+            errorMessage="Start date is required"
             rules={{
               required: true,
-              maxLength: {
-                value: 10,
-                message: "Dosage is too long",
-              },
             }}
           />
           <Input
-            label="Frequency"
-            placeholder="How many times daily"
-            name="frequency"
-            defaultValue={"once daily"}
+            label="Expected End Date"
+            placeholder="When should the plan stop?"
+            name="endDate"
+            type="date"
              {...{ register, errors }}
+             errorMessage="End date is required"
             rules={{
               required: true,
-              maxLength: {
-                value: 30,
-                message: "Frequency is too long",
-              },
             }}
           />
         </div>
+          <Input
+            label="Extra Notes"
+            placeholder="Any additional notes?"
+            name="notes"
+             {...{ register, errors }}
+          />
         <Button
           className="mt-8 max-w-[342px] mx-auto"
           title="Add plan"
           type="submit"
+          loading={loading}
         />
       </form>
     </Modal>
   );
 };
 
-export default AddTreatmentPlan;
+export default AddMedication;
