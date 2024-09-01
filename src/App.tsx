@@ -21,7 +21,7 @@ function App() {
   const { isAuthenticated } = useAuth();
   return (
     <Router basename="/">
-      {/* <InstallButton /> */}
+      <InstallButton />
       <Suspense fallback={<Loader />}>
         <Routes>
           {!isAuthenticated ? (
